@@ -4,9 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Index</title>
 </head>
 <body>
-
+	<h1>Timetable index</h1>
+	<jsp:useBean id="timetable" class=model.Timetable />
+	<form action="display" method="post">
+		<select name="display_choice">
+			<option value="compact">Compact</option>
+			<option value="summary">Summary</option>
+			<option value="full">Full</option>
+		</select>
+		<select name="cohort">
+			<% 
+			for (int i = 0; i < 10; i++) {
+				out.println("stuff" + i);
+			}
+			%>
+		</select>
+	</form>
 </body>
 </html>
