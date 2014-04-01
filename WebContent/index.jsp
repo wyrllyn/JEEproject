@@ -8,20 +8,21 @@
 </head>
 <body>
 	<h1>Timetable index</h1>
-	<jsp:useBean id="timetable" class=model.Timetable />
+	<jsp:useBean id="groups" class="model.Groups" />
 	<form action="display" method="post">
-		<select name="display_choice">
+		<select name="display_mode">
 			<option value="compact">Compact</option>
 			<option value="summary">Summary</option>
 			<option value="full">Full</option>
 		</select>
-		<select name="cohort">
+		<select name="group">
 			<% 
-			for (int i = 0; i < 10; i++) {
-				out.println("stuff" + i);
+			for (String group : groups.getGroups()) {
+				out.println("<option value=\""+ group +"\">" + group + "/>");
 			}
 			%>
 		</select>
+		<input type="submit" />
 	</form>
 </body>
 </html>
