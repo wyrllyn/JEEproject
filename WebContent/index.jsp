@@ -13,11 +13,15 @@
 	
 	<s:form action="display" method="post">
 		<s:select name="display_mode" list="{compact, summary, full}" />
-		<s:select name="group" list="<% 
+		<s:select name="group" list="{<% 
+			int i = 0;
 			for (String group : groups.getGroups()) {
-				out.println("<s:option value=\""+ group +"\">" + group + "/>");
+				out.print(group);
+				i++;
+				if (i < groups.getGroups().size())
+					out.print(", ");
 			}
-			%>" />
+			%>}" />
 		<input type="submit" value="GO!" />
 	</s:form>
 </body>
