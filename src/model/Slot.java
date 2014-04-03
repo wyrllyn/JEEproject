@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Slot {
 	private Date beginning;
-	private Date end;
+	private int duration;
 	private int id; 
 	private String name;
 	private String type; //CM, TD etc.
@@ -13,12 +13,17 @@ public class Slot {
 		
 	}
 	
-	public Date getEnd() {
-		return end;
+
+	public int getDuration() {
+		return duration;
 	}
-	public void setEnd(Date end) {
-		this.end = end;
+
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
+
+
 	public Date getBeginning() {
 		return beginning;
 	}
