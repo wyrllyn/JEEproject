@@ -12,18 +12,12 @@
 	<jsp:useBean id="groups" class="model.Groups" />
 	
 	<s:form action="display" method="post">
-		<s:select name="display_mode" list="">
-			<option value="compact">Compact</option>
-			<option value="summary">Summary</option>
-			<option value="full">Full</option>
-		</s:select>
-		<s:select name="group" list="">
-			<% 
-			/*for (String group : groups.getGroups()) {
+		<s:select name="display_mode" list="{compact, summary, full}" />
+		<s:select name="group" list="<% 
+			for (String group : groups.getGroups()) {
 				out.println("<s:option value=\""+ group +"\">" + group + "/>");
-			}*/
-			%>
-		</s:select>
+			}
+			%>" />
 		<input type="submit" value="GO!" />
 	</s:form>
 </body>
