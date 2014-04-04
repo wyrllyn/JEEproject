@@ -1,6 +1,5 @@
 *.class
 build/
-WEB-INF/classes/
 
 # Package Files #
 *.jar
