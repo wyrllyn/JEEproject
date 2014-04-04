@@ -9,6 +9,7 @@ public class Groups {
 	public Groups() {
 		groups = new ArrayList<String>();
 		groups.add("TEST");
+		groups.add("TEST-2");
 	}
 
 	public List<String> getGroups() {

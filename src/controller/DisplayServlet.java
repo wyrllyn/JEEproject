@@ -15,25 +15,18 @@ public class DisplayServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -7468405028901137391L;
 	
+	public DisplayServlet() {
+		
+	}
+	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String displayMode = request.getParameter("display_mode");
 		String group = request.getParameter("group");
-		String displayPage = "DisplayCompact.jsp";
-		switch (displayMode) {
-		case "compact":
-			displayPage = "DisplayCompact.jsp";
-			break;
-		case "summary":
-			displayPage = "DisplaySummary.jsp";
-			break;
-		case "full":
-			displayPage = "DisplayFull.jsp";
-			break;
-		}
 		
+		request.getSession().setAttribute("display_mode", displayMode);
 		request.getSession().setAttribute("group", group);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(displayPage);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("display.jsp");
 		dispatcher.forward(request, response);
 	}
 }

@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author etudiant
- *
- */
-package view;
