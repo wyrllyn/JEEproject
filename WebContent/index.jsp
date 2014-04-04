@@ -1,6 +1,6 @@
+<%@page import="model.Groups"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,19 +10,21 @@
 <body>
 	<h1>Timetable index</h1>
 	<jsp:useBean id="groups" class="model.Groups" />
-	
-	<s:form action="display" method="post">
-		<s:select name="display_mode" list="{compact, summary, full}" />
-		<s:select name="group" list="{<% 
-			int i = 0;
+	<% groups = new Groups(); %>
+	<form action="display" method="post">
+		<select name="display_mode">
+			<option value="compact">Compact</option>
+			<option value="summary">Summary</option>
+			<option value="full">Full</option>
+		</select>
+		<select name="group">
+			<% 
 			for (String group : groups.getGroups()) {
-				out.print(group);
-				i++;
-				if (i < groups.getGroups().size())
-					out.print(", ");
+				out.println("<option value=\""+ group +"\">" + group + "</option>");
+
 			}
-			%>}" />
-		<input type="submit" value="GO!" />
-	</s:form>
+		 	%>
+		</select> <input type="submit" value="GO!" />
+	</form>
 </body>
 </html>
