@@ -17,7 +17,7 @@ public class DatabaseInterface {
 	
 	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
-	protected static final String DEFAULT_URL = "jdbc:sqlite:jee.db";
+	protected static final String DEFAULT_URL = "jdbc:sqlite:db/jee.db";
 	//"jdbc:mysql://localhost:3306/jeedb";
 	
 	public static DatabaseInterface dbInterface =
@@ -34,8 +34,20 @@ public class DatabaseInterface {
 		this.user = user;
 		this.password = password;
 	}
+	
+	/*
+	 * Getters / setters
+	 */
+	
+	public void setUrl(String url) {
+		this.url = "jdbc:sqlite:" + url + "db/jee.db";
+	}
 
-	protected void connect() {
+	/*
+	 * 
+	 */
+	
+	public void connect() {
 		if (!connected) {
 			try {
 				Class.forName( getDriverName() );
@@ -56,7 +68,7 @@ public class DatabaseInterface {
 		}
 	}
 	
-	protected void disconnect() {
+	public void disconnect() {
 		try {
 			connection.close();
 			connected  = false;
@@ -65,6 +77,10 @@ public class DatabaseInterface {
 		}
 	}
 
+	/*
+	 * 
+	 */
+	
 	protected String getDriverName() {
 		switch (dbType) {
 		case MY_SQL:
