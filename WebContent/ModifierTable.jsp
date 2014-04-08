@@ -11,7 +11,7 @@
 <body>
 
 
-
+<center>
 
 <a href="login.jsp">Back to login</a>
 <br/>
@@ -57,7 +57,8 @@
 			<td><%=s.getId() %></td>
 			<td><%=s.getName() %></td>
 			<td><%=s.getType() %></td>
-					
+			<td><a href="modifierSlot.jsp?name=<%=s.getName() %>&beginning=<%=s.getBeginning() %>&duration=<%=s.getDuration() %>&type=<%=s.getType() %>">Modifier Slot</a></td>
+			<td><a onclick=window.confirm("Are u sure to delete?") href="SlotServlet?flag=delSlot&id=<%=s.getId()%>">Delete slot</a></td>
 		</tr>
 		<% 
 	}
