@@ -15,9 +15,10 @@ public class DatabaseInterface {
 	
 	private Connection connection;
 	
-	private DBType dbType = DBType.MY_SQL;
+	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
-	protected static final String DEFAULT_URL = "jdbc:mysql://localhost:3306/jeedb";
+	protected static final String DEFAULT_URL = "jdbc:sqlite:jee.db";
+	//"jdbc:mysql://localhost:3306/jeedb";
 	
 	public static DatabaseInterface dbInterface =
 			new DatabaseInterface(DEFAULT_URL, "default", "password");
@@ -38,7 +39,14 @@ public class DatabaseInterface {
 		if (!connected) {
 			try {
 				Class.forName( getDriverName() );
-				connection = DriverManager.getConnection( url, user, password );
+				switch (dbType) {
+				case MY_SQL:
+					connection = DriverManager.getConnection( url, user, password );
+					break;
+				case SQLITE:
+					connection = DriverManager.getConnection(url);
+					break;
+				}
 				connected = true;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
@@ -72,7 +80,7 @@ public class DatabaseInterface {
 		List<String> list = new ArrayList<String>();
 		try {
 			Statement statement = connection.createStatement();
-			String query = "SELECT name FROM Group;";
+			String query = "SELECT name FROM Group_;";
 			ResultSet result = statement.executeQuery(query);
 			while (result.next()) {
 				String name = result.getString("name");
@@ -91,9 +99,10 @@ public class DatabaseInterface {
 		try {
 			Statement statement = connection.createStatement();
 			String query = "SELECT count(*) FROM User "
-					+ "WHERE name = " + username + " AND password = " + userpassword;
+					+ "WHERE name = \"" + username + "\" AND password = \"" + userpassword
+					+ "\";";
 			ResultSet result = statement.executeQuery(query);
-			result.first();
+			result.next();
 			if (result.getInt(1) == 1) { //hackish crap
 				return true;
 			} else {
