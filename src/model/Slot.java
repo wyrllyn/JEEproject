@@ -6,6 +6,7 @@ public class Slot {
 	private Date beginning;
 	private int duration;
 	private int id; 
+	private Person teacher;
 	private String name;
 	private String type; //CM, TD etc.
 	
@@ -53,5 +54,15 @@ public class Slot {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+
+	public Person getTeacher() {
+		return teacher;
+	}
+
+
+	public void setTeacher(Person teacher) {
+		this.teacher = teacher;
 	}
 }
