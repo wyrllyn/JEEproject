@@ -65,4 +65,9 @@ public class Slot {
 	public void setTeacher(Person teacher) {
 		this.teacher = teacher;
 	}
+	
+	public Date getEndDate() {
+		Date end = new Date(beginning.getTime() + (duration * 60000));
+		return end;
+	}
 }
