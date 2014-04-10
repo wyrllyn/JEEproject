@@ -5,14 +5,11 @@ import java.util.Date;
 
 public class DateUtil {
 
-<<<<<<< HEAD
 	/**
 	 * 
 	 * @param date
 	 * @return String name of the day of the week.
 	 */
-=======
->>>>>>> a5e44f369724e5ec09ebbbee423855a5e8acc672
 	public static String getDayOfTheWeek(Date date) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
