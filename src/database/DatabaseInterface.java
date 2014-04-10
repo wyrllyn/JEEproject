@@ -1,4 +1,4 @@
-package controller;
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Room;
 
 public class DatabaseInterface {
 	private String url;
@@ -18,21 +20,47 @@ public class DatabaseInterface {
 	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
 	protected static final String DEFAULT_URL = "jdbc:sqlite:db/jee.db";
+	protected static final String DEFAULT_USER = "default";
+	protected static final String DEFAULT_PASSWORD = "password";
 	//"jdbc:mysql://localhost:3306/jeedb";
 	
-	public static DatabaseInterface dbInterface =
-			new DatabaseInterface(DEFAULT_URL, "default", "password");
+	private static DatabaseInterface instance;
+			;
 	
 	protected enum DBType {
 		MY_SQL,
 		SQLITE
 	}
 	
+	/**
+	 * 
+	 * @param url
+	 * @param user
+	 * @param password
+	 */
 	public DatabaseInterface(String url, String user, String password) {
 		super();
 		this.url = url;
 		this.user = user;
 		this.password = password;
+	}
+	
+	/**
+	 * Needs to be here for bean purposes.
+	 */
+	public DatabaseInterface() {
+		this(DEFAULT_URL, DEFAULT_USER, DEFAULT_PASSWORD);
+	}
+	
+	/**
+	 * Retrieves or creates the master DBI instance.
+	 * @return 
+	 */
+	public static DatabaseInterface getInstance() {
+		if (instance == null) {
+			instance = new DatabaseInterface();
+		}
+		return instance;
 	}
 	
 	/*
@@ -44,9 +72,12 @@ public class DatabaseInterface {
 	}
 
 	/*
-	 * 
+	 * Connect / Disconnect / Driver
 	 */
 	
+	/**
+	 * Establishes a connection with the database if none exists.
+	 */
 	public void connect() {
 		if (!connected) {
 			try {
@@ -76,10 +107,6 @@ public class DatabaseInterface {
 			e.printStackTrace();
 		}
 	}
-
-	/*
-	 * 
-	 */
 	
 	protected String getDriverName() {
 		switch (dbType) {
@@ -91,6 +118,14 @@ public class DatabaseInterface {
 		return null;
 	}
 	
+	/*
+	 * Requests
+	 */
+	
+	/**
+	 * 
+	 * @return Names of the groups in table Group_
+	 */
 	public List<String> getGroupList() {
 		connect();
 		List<String> list = new ArrayList<String>();
@@ -110,6 +145,12 @@ public class DatabaseInterface {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param username
+	 * @param userpassword
+	 * @return true if the user has been authenticated.
+	 */
 	public boolean authenticateUser(String username, String userpassword) {
 		connect();
 		try {
@@ -129,4 +170,29 @@ public class DatabaseInterface {
 		}
 		return false;
 	}
+	
+	/**
+	 * Retrieves the list of Room in table Room
+	 * @return
+	 */
+	public List<Room> getRooms() {
+		connect();
+		List<Room> rooms = new ArrayList<Room>();
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Room;";
+			ResultSet result = statement.executeQuery(query);
+			while (result.next()) {
+				int id = Integer.parseInt(result.getString("id"));
+				Room room = new Room();
+				room.setId(id);
+				rooms.add(room);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rooms;
+	}
+	
+	
 }
