@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 public class Slot {
-	private Date beginning;
+	private DateUsed beginning;
 	private int duration;
 	private int id; 
 	private Person teacher;
@@ -15,6 +15,7 @@ public class Slot {
 	}
 	
 
+
 	public int getDuration() {
 		return duration;
 	}
@@ -25,10 +26,10 @@ public class Slot {
 	}
 
 
-	public Date getBeginning() {
+	public DateUsed getBeginning() {
 		return beginning;
 	}
-	public void setBeginning(Date beginning) {
+	public void setBeginning(DateUsed beginning) {
 		this.beginning = beginning;
 	}
 	
@@ -66,8 +67,8 @@ public class Slot {
 		this.teacher = teacher;
 	}
 	
-	public Date getEndDate() {
+/*	public Date getEndDate() {
 		Date end = new Date(beginning.getTime() + (duration * 60000));
 		return end;
-	}
+	}*/
 }

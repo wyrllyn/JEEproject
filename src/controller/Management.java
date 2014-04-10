@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.tiles.request.collection.KeySet;
 
+import model.DateUsed;
 import model.FutureTimetable;
 import model.Person;
 import model.Room;
@@ -16,7 +17,6 @@ import model.Timetable;
 
 public class Management {
 
-	static final long ONE_MINUTE_IN_MILLIS=60000;//millisecs
 	private List<Timetable> timetables;
 	private List<FutureTimetable> toSet; 
 	private List<Room> rooms;
@@ -52,23 +52,12 @@ public class Management {
 	public void createTimeTable(FutureTimetable future){
 		Timetable toAdd = new Timetable();	
 		// creation => to 8:00 to 18:30 // 10minutes of break between classes
-		int totalTime = 0;
-		for (int i = 0; i < future.getToSet().size() ; i++) {
-			totalTime += future.getToSet().get(i).getDuration();
-		}
-		
-		//trouver comment manipuler dates en java...
-		/*
-		 
-		  static final long ONE_MINUTE_IN_MILLIS=60000;//millisecs
+		// begin with LUNDI, check all of the hours. IF already used => MARDI etc.
 
-			long t=date.getTime();
-			Date afterAddingTenMins=new Date(t + (10 * ONE_MINUTE_IN_MILLIS));
-		 */
 		
-		if (totalTime > 20){
+	/*	if (totalTime > 20){
 			
-		}
+		}*/
 		
 		
 		timetables.add(toAdd);		
@@ -76,7 +65,7 @@ public class Management {
 	
 	// know if a room is available 
 	
-	public boolean isThisRoomEmpty(Room room, int duration, Date beginning){
+	public boolean isThisRoomEmpty(Room room, int duration, DateUsed beginning){
 		for (int i = 0; i < timetables.size() ; i++) {
 			Map<Slot,Room> temp = timetables.get(i).getTimetable();
 			for (Slot key : timetables.get(i).getTimetable().keySet()){
@@ -91,7 +80,7 @@ public class Management {
 		return true;
 	}
 	
-	public boolean isThisPersonAvailable(Person p, int duration, Date beginning) {
+	public boolean isThisPersonAvailable(Person p, int duration, DateUsed beginning) {
 		for (int i = 0; i < timetables.size() ; i++) {
 			Map<Slot,Room> temp = timetables.get(i).getTimetable();
 			for (Slot key : timetables.get(i).getTimetable().keySet()){
@@ -106,15 +95,21 @@ public class Management {
 		return true;
 	}
 	
-	public boolean conflictOfTime (Slot slot, int duration, Date beginning) {
-		if(slot.getBeginning().equals(beginning)){
+	public boolean conflictOfTime (Slot slot, int duration, DateUsed beginning) {
+		if(slot.getBeginning().compareTo(beginning) == 0){
 			return true;
 		}
 		
 		//TODO: compare if dates + duration are in conflict or not
-		Date endSlot = slot.getBeginning();
-		Date endTest = beginning;
+		DateUsed endSlot = slot.getBeginning().calcutateEnd(slot.getDuration());
+		DateUsed endTest = beginning.calcutateEnd(duration);
 		
+		// if says are different, no conflict !
+		if(endSlot.getDay() != endTest.getDay() ||
+				slot.getBeginning().getDay() != beginning.getDay()){
+			return false;
+		}
+			
 		return false;
 	}
 	

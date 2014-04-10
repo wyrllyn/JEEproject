@@ -24,7 +24,7 @@ public class SlotControl {
 		boolean b= false;
 		try {
 			//�õ�����
-			ct=new ConnDB().getConn();
+		/*	ct=new ConnDB().getConn();
 			sm=ct.createStatement();
 			//ִ��
 			int a=sm.executeUpdate("delete from Slot where id='"+id+"'");
@@ -32,13 +32,13 @@ public class SlotControl {
 			if(a==1){
 				
 				b=true;
-			}
+			} */
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			this.close();
-		}
+		//	this.close();
+		} 
 		return b;
 	}
 
