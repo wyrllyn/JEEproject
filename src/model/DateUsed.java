@@ -65,6 +65,7 @@ public class DateUsed implements Comparable {
 		this.day = day;
 	}
 	
+	//is the present Date + duration included into second ? 
 	public boolean includedInto(int fDuration, DateUsed second, int sDuration){
 		DateUsed currentEnd = this.calcutateEnd(fDuration);
 		DateUsed sEnd = second.calcutateEnd(sDuration);
@@ -75,7 +76,26 @@ public class DateUsed implements Comparable {
 		if (this.getDay() != second.getDay()){
 			return false;
 		}
-	//	if (this.getHours() )
+		if (this.getHours() != second.getHours() || this.getHours() != sEnd.getHours()){
+			if(this.getHours() <= sEnd.getHours() && this.getHours() >= second.getHours()){
+				return true;
+			}
+		}
+		if (currentEnd.getHours() != second.getHours() || currentEnd.getHours() != sEnd.getHours()){
+			if(currentEnd.getHours() <= sEnd.getHours() && currentEnd.getHours() >= second.getHours()){
+				return true;
+			}
+		}
+		if (this.getHours() == second.getHours() || this.getHours() == sEnd.getHours()){
+			if (this.getMinutes() >= second.getMinutes() && this.getMinutes() <= sEnd.getMinutes()){
+				return true;
+			}
+		}
+		if (currentEnd.getHours() == second.getHours() || currentEnd.getHours() == sEnd.getHours()){
+			if (currentEnd.getMinutes() >= second.getMinutes() && currentEnd.getMinutes() <= sEnd.getMinutes()){
+				return true;
+			}
+		}
 		
 		
 		return false;
