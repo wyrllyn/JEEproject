@@ -2,6 +2,7 @@ package model;
 
 public class Person {
 	
+	private int id;
 	private String username;
 	/*type = {prof,etudiant}*/
 	private String type;
@@ -33,6 +34,14 @@ public class Person {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override

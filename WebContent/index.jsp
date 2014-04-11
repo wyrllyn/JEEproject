@@ -15,6 +15,7 @@
 	<%
 		out.println("<p>Rooms: " + databaseInterface.getRooms() + "</p>");
 		out.println("<p>Slots: " + databaseInterface.getSlots() + "</p>");
+		out.println("<p>Teachers: " + databaseInterface.getTeachers() + "</p>");
 	%>
 	<form action="display" method="post">
 		<select name="display_mode">
