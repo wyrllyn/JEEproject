@@ -2,6 +2,7 @@ package model;
 
 public class Person {
 	
+	private int id;
 	private String username;
 	/*type = {prof,etudiant}*/
 	private String type;
@@ -35,7 +36,17 @@ public class Person {
 		this.password = password;
 	}
 	
+	public int getId() {
+		return id;
+	}
 	
-	
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	@Override
+	public String toString() {
+		return "Person [username=" + username + ", type=" + type
+				+ ", password=" + password + "]";
+	}
 }

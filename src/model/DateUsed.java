@@ -6,9 +6,15 @@ public class DateUsed implements Comparable {
 	private Days day;
 	
 	public DateUsed() {
-		
+		init();
 	}	
 	
+	private void init() {
+		this.hours = 0;
+		this.minutes = 0;
+		this.day = Days.LUNDI;
+	}
+
 	public DateUsed calcutateEnd(int duration){
 		DateUsed end = new DateUsed();
 		int min = this.minutes + duration;
@@ -115,6 +121,12 @@ public class DateUsed implements Comparable {
 		}
 		// TODO later before or after
 		return -1;
+	}
+
+	@Override
+	public String toString() {
+		return "DateUsed [hours=" + hours + ", minutes=" + minutes + ", day="
+				+ day + "]";
 	}
 	
 	//used for some manual tests, to remove later

@@ -11,6 +11,7 @@ import java.util.List;
 
 import util.DateUtil;
 import model.DateUsed;
+import model.Person;
 import model.Room;
 import model.Slot;
 
@@ -23,13 +24,12 @@ public class DatabaseInterface {
 	
 	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
-	protected static final String DEFAULT_URL = "jdbc:sqlite:db/jee.db";
+	protected static final String DEFAULT_URL = "jdbc:sqlite:/home/etudiant/db/jee.db";
 	protected static final String DEFAULT_USER = "default";
 	protected static final String DEFAULT_PASSWORD = "password";
 	//"jdbc:mysql://localhost:3306/jeedb";
 	
 	private static DatabaseInterface instance;
-			;
 	
 	protected enum DBType {
 		MY_SQL,
@@ -72,7 +72,11 @@ public class DatabaseInterface {
 	 */
 	
 	public void setUrl(String url) {
-		this.url = "jdbc:sqlite:" + url + "db/jee.db";
+		this.url = url;
+	}
+	
+	public Connection getConnection() {
+		return connection;
 	}
 
 	/*
@@ -224,4 +228,31 @@ public class DatabaseInterface {
 		}
 		return slots;
 	}
+	
+	public List<Person> getTeachers() {
+		List<Person> teachers = new ArrayList<Person>();
+		
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT User.id, name FROM Teacher, User"
+					+ " WHERE User.id = user_id;";
+			ResultSet result = statement.executeQuery(query);
+			while (result.next()) {
+				Person teacher = new Person();
+				int id = result.getInt("id");
+				teacher.setId(id);
+				
+				teacher.setName(result.getString("name"));
+				teacher.setPassword("");
+				teacher.setType("prof");
+				
+				teachers.add(teacher);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return teachers;
+	}
+
 }

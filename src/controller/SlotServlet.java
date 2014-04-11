@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.DateUsed;
+import model.Person;
 import model.SlotControl;
 
 /**
@@ -51,23 +53,15 @@ String flag = request.getParameter("flag");
 		
 		else if(flag.equals("addSlot")){
 		
-			String name = request.getParameter("name");
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, HH:mm");
-			Date beginning=null;
-			try {
-				beginning = (Date) formatter.parse(request.getParameter("beginning"));
-			} catch (ParseException e) {
-				
-				e.printStackTrace();
-			}
-			
+			String name = request.getParameter("name");		
+			DateUsed beginning = (DateUsed)request.getAttribute("beginning");				
 			int duration = Integer.parseInt(request.getParameter("duration"));
+			Person teacher = (Person) request.getAttribute("teacher");
 			String type = request.getParameter("type");
 		
 			SlotControl sc = new SlotControl();
 		    
-			if(sc.addSlot(name, beginning, duration, type)){
+			if(sc.addSlot(name, beginning, duration, teacher, type)){
 				//add success
 				request.getRequestDispatcher("suc.jsp").forward(request, response);
 			}else{
@@ -77,24 +71,18 @@ String flag = request.getParameter("flag");
 		}
 		
 		else if(flag.equals("modifySlot")){
+			int id = Integer.parseInt(request.getParameter("id"));
 			
 			String name = request.getParameter("name");
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, HH:mm");
-			Date beginning=null;
-			try {
-				beginning = (Date) formatter.parse(request.getParameter("beginning"));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			DateUsed beginning = (DateUsed)request.getAttribute("beginning");	
 			int duration = Integer.parseInt(request.getParameter("duration"));
+			Person teacher = (Person) request.getAttribute("teacher");
 			String type = request.getParameter("type");
-		
+			
+			
 			SlotControl sc = new SlotControl();
 		    
-			if(sc.modifierSlot(name, beginning, duration, type)){
+			if(sc.modifierSlot(id, name, beginning, duration, teacher, type)){
 				//add success
 				request.getRequestDispatcher("suc.jsp").forward(request, response);
 			}else{

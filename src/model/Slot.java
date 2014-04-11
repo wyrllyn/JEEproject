@@ -1,17 +1,20 @@
 package model;
 
-import java.util.Date;
-
 public class Slot {
+	private int id;
+	private String name;
 	private DateUsed beginning;
 	private int duration;
-	private int id; 
 	private Person teacher;
-	private String name;
 	private String type; //CM, TD etc.
 	
 	public Slot() {
-		
+		this.name = "";
+		this.setBeginning(null);
+		this.setDuration(0);
+		this.setTeacher(new Person());
+		this.getTeacher().setName("");
+		this.setType("");
 	}
 	
 
@@ -66,9 +69,18 @@ public class Slot {
 	public void setTeacher(Person teacher) {
 		this.teacher = teacher;
 	}
+
+	@Override
+	public String toString() {
+		return "Slot [id=" + id + ", name=" + name + ", beginning=" + beginning
+				+ ", duration=" + duration + ", teacher=" + teacher + ", type="
+				+ type + "]";
+	}
 	
 /*	public Date getEndDate() {
 		Date end = new Date(beginning.getTime() + (duration * 60000));
 		return end;
 	}*/
+	
+	
 }

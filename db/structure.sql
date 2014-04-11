@@ -11,9 +11,10 @@ create table User(
 	password varchar(50)
 );
 
-create table Teacher(
+create table Teacher( -- just tells that a user is also a teacher
 	id integer primary key autoincrement,
-	name varchar(50)
+	user_id integer not null,
+	foreign key (user_id) references User(id)
 );
 
 create table Room(
@@ -26,7 +27,8 @@ create table Class(
 	teacher_id integer,
 	duration integer, -- in minutes
 	name varchar(50),
-	foreign key (teacher_id) references Teacher(id)
+	foreign key (teacher_id) references Teacher(id),
+	check (duration <= 120)
 );
 
 create table Slot(
@@ -38,7 +40,7 @@ create table Slot(
 	class_type varchar(2),	-- CM, TD, TP
 	beginning integer,		-- milliseconds since the dawn of time
 	name varchar(50),		-- what's that for?
-	foreign key (teacher_id)
+	foreign key (teacher_id) references Teacher(id)
 );
 
 create table Timetable(
