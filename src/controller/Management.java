@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.DateUsed;
+import model.Days;
 import model.FutureTimetable;
 import model.Person;
 import model.Room;
@@ -45,22 +46,60 @@ public class Management {
 	}
 
 	public void createTimeTable(FutureTimetable future){
-		Timetable toAdd = new Timetable();	
+		Timetable toAdd = new Timetable();
+		toAdd.setGroupName(future.getGroupName());
+		int size = future.getToSet().size();
+
 		// creation => to 8:00 to 18:30 // 10minutes of break between classes
 		// begin with LUNDI, check all of the hours. IF already used => MARDI etc.
-
 		
-	/*	if (totalTime > 20){
+		while(size > 0){
+			//loop to choose the biggest class (in term of duration)
 			
-		}*/
+			//use DateUsed for a date
+			//after a date is chosen => room with method			
+			
+			//if an element of future is added => size --	
+			//remove it from future
+		}
 		
 		
 		timetables.add(toAdd);		
 	}
 	
-	// know if a room is available 
+	private DateUsed futureDate(Timetable t, Slot s) {
+		//check for teacher here ?
+		DateUsed d = new DateUsed();
+		if (t.getTimetable().size() == 0){
+			d.setDay(Days.LUNDI);
+			d.setHours(8);
+			d.setMinutes(0);
+		}
+		else {
+			
+		}
+		
+		return d;		
+	}
 	
-	public boolean isThisRoomEmpty(Room room, int duration, DateUsed beginning){
+	//Rename this method / used to know if we can set a duration into a day
+	private boolean possible(Days day, int duration, Timetable t){
+		//find how to mark a slot as occupied
+		// don't forget pauses => must have 10 minutes between classes and 1:30 around 12
+		Map<Integer[][], Integer[][]> occupied;
+		for (Slot key : t.getTimetable().keySet()) {
+			if(key.getBeginning().getDay() == day) {
+				
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	
+	// called into createTimeTable	
+	private boolean isThisRoomEmpty(Room room, int duration, DateUsed beginning){
 		for (int i = 0; i < timetables.size() ; i++) {
 			Map<Slot,Room> temp = timetables.get(i).getTimetable();
 			for (Slot key : timetables.get(i).getTimetable().keySet()){
@@ -74,6 +113,8 @@ public class Management {
 		}
 		return true;
 	}
+	
+	// called into createTimeTable
 	
 	public boolean isThisPersonAvailable(Person p, int duration, DateUsed beginning) {
 		for (int i = 0; i < timetables.size() ; i++) {
@@ -90,7 +131,8 @@ public class Management {
 		return true;
 	}
 	
-	public boolean conflictOfTime (Slot slot, int duration, DateUsed beginning) {
+	//called into isThisPersonAvailable() & isThisRoomEmpty()
+	private boolean conflictOfTime (Slot slot, int duration, DateUsed beginning) {
 		//check if a slot is included into another
 		if(slot.getBeginning().includedInto(slot.getDuration(), beginning, duration) ||
 				beginning.includedInto(duration, slot.getBeginning(), slot.getDuration())){
