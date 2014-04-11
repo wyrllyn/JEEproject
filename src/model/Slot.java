@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class Slot {
 	private int id;
 	private String name;
@@ -71,9 +69,18 @@ public class Slot {
 	public void setTeacher(Person teacher) {
 		this.teacher = teacher;
 	}
+
+	@Override
+	public String toString() {
+		return "Slot [id=" + id + ", name=" + name + ", beginning=" + beginning
+				+ ", duration=" + duration + ", teacher=" + teacher + ", type="
+				+ type + "]";
+	}
 	
 /*	public Date getEndDate() {
 		Date end = new Date(beginning.getTime() + (duration * 60000));
 		return end;
 	}*/
+	
+	
 }

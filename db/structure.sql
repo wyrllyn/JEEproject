@@ -38,7 +38,7 @@ create table Slot(
 	class_type varchar(2),	-- CM, TD, TP
 	beginning integer,		-- milliseconds since the dawn of time
 	name varchar(50),		-- what's that for?
-	foreign key (teacher_id)
+	foreign key (teacher_id) references Teacher(id)
 );
 
 create table Timetable(

@@ -13,10 +13,8 @@
 	<jsp:useBean id="databaseInterface" class="database.DatabaseInterface" />
 	<% databaseInterface = DatabaseInterface.getInstance(); %>
 	<%
-		out.println("<p>");
-		out.println("Rooms: " + databaseInterface.getRooms());
-		out.println("Slots: " + databaseInterface.getSlots());
-		out.println("</p>");
+		out.println("<p>Rooms: " + databaseInterface.getRooms() + "</p>");
+		out.println("<p>Slots: " + databaseInterface.getSlots() + "</p>");
 	%>
 	<form action="display" method="post">
 		<select name="display_mode">
