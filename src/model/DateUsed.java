@@ -116,6 +116,12 @@ public class DateUsed implements Comparable {
 		// TODO later before or after
 		return -1;
 	}
+
+	@Override
+	public String toString() {
+		return "DateUsed [hours=" + hours + ", minutes=" + minutes + ", day="
+				+ day + "]";
+	}
 	
 	
 
