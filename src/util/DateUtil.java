@@ -13,7 +13,7 @@ public class DateUtil {
 	 * @param date
 	 * @return String name of the day of the week.
 	 */
-	public static String getDayOfTheWeek(Date date) { //TODO: is that actually used anywhere?
+	public static String getDayOfTheWeek(Date date) { // Note: may not actually be used anywhere
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		int day = c.get(Calendar.DAY_OF_WEEK);
@@ -46,7 +46,7 @@ public class DateUtil {
 		c.setTime(date);
 		c.get(Calendar.DAY_OF_WEEK);
 		
-		int hours = c.get(Calendar.HOUR);
+		int hours = c.get(Calendar.HOUR_OF_DAY);
 		int minutes = c.get(Calendar.MINUTE);
 		Days day = convertToDays(c.get(Calendar.DAY_OF_WEEK));
 		
