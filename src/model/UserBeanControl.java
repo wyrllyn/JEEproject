@@ -1,11 +1,11 @@
 package model;
 
-import controller.DatabaseInterface;
+import database.DatabaseInterface;
 
 public class UserBeanControl {
 	
 	public String checkUser(String username,String password){
-		if(DatabaseInterface.dbInterface.authenticateUser(username, password)){
+		if(DatabaseInterface.getInstance().authenticateUser(username, password)){
 			return "prof";
 		}
 		else

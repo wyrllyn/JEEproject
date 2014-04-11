@@ -28,13 +28,15 @@ public class SlotControl {
 			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
 			di.connect();
 			ct=di.getConnection();
+			//�õ�����
+		/*	ct=new ConnDB().getConn();
 			sm=ct.createStatement();
 			
 			int a=sm.executeUpdate("delete from Slot where id='"+id+"'");
 			
 			if(a==1){				
 				b=true;
-			}
+			} */
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Slot {
 	private int id;
 	private String name;
-	private Date beginning;
+	private DateUsed beginning;
 	private int duration;
 	private Person teacher;
 	private String type; //CM, TD etc.
@@ -20,6 +20,7 @@ public class Slot {
 	}
 	
 
+
 	public int getDuration() {
 		return duration;
 	}
@@ -30,10 +31,10 @@ public class Slot {
 	}
 
 
-	public Date getBeginning() {
+	public DateUsed getBeginning() {
 		return beginning;
 	}
-	public void setBeginning(Date beginning) {
+	public void setBeginning(DateUsed beginning) {
 		this.beginning = beginning;
 	}
 	
@@ -70,4 +71,9 @@ public class Slot {
 	public void setTeacher(Person teacher) {
 		this.teacher = teacher;
 	}
+	
+/*	public Date getEndDate() {
+		Date end = new Date(beginning.getTime() + (duration * 60000));
+		return end;
+	}*/
 }

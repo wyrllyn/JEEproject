@@ -1,3 +1,4 @@
+<%@page import="database.DatabaseInterface"%>
 <%@page import="model.Groups"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,8 +10,8 @@
 </head>
 <body>
 	<h1>Timetable index</h1>
-	<jsp:useBean id="groups" class="model.Groups" />
-	<% groups = new Groups(); %>
+	<jsp:useBean id="databaseInterface" class="database.DatabaseInterface" />
+	<% databaseInterface = DatabaseInterface.getInstance(); %>
 	<form action="display" method="post">
 		<select name="display_mode">
 			<option value="compact">Compact</option>
@@ -18,13 +19,13 @@
 			<option value="full">Full</option>
 		</select>
 		<select name="group">
-			<% 
-			for (String group : groups.getGroups()) {
+			<%
+			for (String group : databaseInterface.getGroupList()) {
 				out.println("<option value=\""+ group +"\">" + group + "</option>");
-
 			}
 		 	%>
-		</select> <input type="submit" value="GO!" />
+		</select>
+		<input type="submit" value="GO!" />
 	</form>
 </body>
 </html>

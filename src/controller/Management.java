@@ -1,13 +1,15 @@
 package controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
 import java.util.Set;
 
 
+=======
+>>>>>>> 0eb08112210438d1764472cd03aa7e50b49da9dc
 
+import model.DateUsed;
 import model.FutureTimetable;
 import model.Person;
 import model.Room;
@@ -16,7 +18,6 @@ import model.Timetable;
 
 public class Management {
 
-	static final long ONE_MINUTE_IN_MILLIS=60000;//millisecs
 	private List<Timetable> timetables;
 	private List<FutureTimetable> toSet; 
 	private List<Room> rooms;
@@ -52,23 +53,12 @@ public class Management {
 	public void createTimeTable(FutureTimetable future){
 		Timetable toAdd = new Timetable();	
 		// creation => to 8:00 to 18:30 // 10minutes of break between classes
-		int totalTime = 0;
-		for (int i = 0; i < future.getToSet().size() ; i++) {
-			totalTime += future.getToSet().get(i).getDuration();
-		}
-		
-		//trouver comment manipuler dates en java...
-		/*
-		 
-		  static final long ONE_MINUTE_IN_MILLIS=60000;//millisecs
+		// begin with LUNDI, check all of the hours. IF already used => MARDI etc.
 
-			long t=date.getTime();
-			Date afterAddingTenMins=new Date(t + (10 * ONE_MINUTE_IN_MILLIS));
-		 */
 		
-		if (totalTime > 20){
+	/*	if (totalTime > 20){
 			
-		}
+		}*/
 		
 		
 		timetables.add(toAdd);		
@@ -76,7 +66,7 @@ public class Management {
 	
 	// know if a room is available 
 	
-	public boolean isThisRoomEmpty(Room room, int duration, Date beginning){
+	public boolean isThisRoomEmpty(Room room, int duration, DateUsed beginning){
 		for (int i = 0; i < timetables.size() ; i++) {
 			Map<Slot,Room> temp = timetables.get(i).getTimetable();
 			for (Slot key : timetables.get(i).getTimetable().keySet()){
@@ -91,7 +81,7 @@ public class Management {
 		return true;
 	}
 	
-	public boolean isThisPersonAvailable(Person p, int duration, Date beginning) {
+	public boolean isThisPersonAvailable(Person p, int duration, DateUsed beginning) {
 		for (int i = 0; i < timetables.size() ; i++) {
 			Map<Slot,Room> temp = timetables.get(i).getTimetable();
 			for (Slot key : timetables.get(i).getTimetable().keySet()){
@@ -106,28 +96,17 @@ public class Management {
 		return true;
 	}
 	
-	public boolean conflictOfTime (Slot slot, int duration, Date beginning) {
-		if(slot.getBeginning().equals(beginning)){
+	public boolean conflictOfTime (Slot slot, int duration, DateUsed beginning) {
+		//check if a slot is included into another
+		if(slot.getBeginning().includedInto(slot.getDuration(), beginning, duration) ||
+				beginning.includedInto(duration, slot.getBeginning(), slot.getDuration())){
 			return true;
 		}
-		
-		//TODO: compare if dates + duration are in conflict or not
-		Date endSlot = slot.getBeginning();
-		Date endTest = beginning;
-		
 		return false;
 	}
 	
 	public void removeSlot(Timetable table, Slot slotToRemove){
 		
 	}
-	
-	/*public static void main(){
-
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm");
-		Date d1 = df.parse(interviewList.get(37).getTime());
-		long t = date.getTime();
-		Date afterAddingTenMins=new Date(t + (10 * ONE_MINUTE_IN_MILLIS));
-	}*/
 
 }
