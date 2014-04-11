@@ -12,6 +12,12 @@
 	<h1>Timetable index</h1>
 	<jsp:useBean id="databaseInterface" class="database.DatabaseInterface" />
 	<% databaseInterface = DatabaseInterface.getInstance(); %>
+	<%
+		out.println("<p>");
+		out.println("Rooms: " + databaseInterface.getRooms());
+		out.println("Slots: " + databaseInterface.getSlots());
+		out.println("</p>");
+	%>
 	<form action="display" method="post">
 		<select name="display_mode">
 			<option value="compact">Compact</option>

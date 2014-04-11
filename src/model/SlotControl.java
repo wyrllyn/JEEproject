@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.*;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
-import controller.DatabaseInterface;
+import database.DatabaseInterface;
 
 public class SlotControl {
 	//prepare statement
