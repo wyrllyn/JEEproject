@@ -28,6 +28,10 @@ public class DatabaseInterface {
 		SQLITE
 	}
 	
+	public Connection getConnection(){
+		return this.connection;
+	}
+	
 	public DatabaseInterface(String url, String user, String password) {
 		super();
 		this.url = url;
@@ -35,7 +39,7 @@ public class DatabaseInterface {
 		this.password = password;
 	}
 
-	protected void connect() {
+	public void connect() {
 		if (!connected) {
 			try {
 				Class.forName( getDriverName() );
@@ -56,7 +60,7 @@ public class DatabaseInterface {
 		}
 	}
 	
-	protected void disconnect() {
+	public void disconnect() {
 		try {
 			connection.close();
 			connected  = false;
@@ -65,7 +69,7 @@ public class DatabaseInterface {
 		}
 	}
 
-	protected String getDriverName() {
+	public String getDriverName() {
 		switch (dbType) {
 		case MY_SQL:
 			return "com.mysql.jdbc.Driver";

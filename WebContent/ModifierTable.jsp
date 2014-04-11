@@ -20,27 +20,17 @@
 <br/>
 </center>
 <h1>Modifier l'emploi du temps</h1>
-<%
 
-	
-	
-	
-	
-	//调用UserBeanCl的方法，完成分页显示
-	//UserBeanCl ubc=new UserBeanCl();
-	//ArrayList al=ubc.getUsersByPage(pageNow);
-	//要现实的用户信息从request中取
-	//ArrayList al=(ArrayList)request.getAttribute("result");
-%>
 
 
 <table border="1">
 
 <tr bgcolor="pink">
-	<td>time</td>
-	<td>duration</td>
 	<td>id</td>
 	<td>name</td>
+	<td>time</td>
+	<td>duration</td>
+	<td>teacher</td>
 	<td>type</td>
 	<td>modifier</td>
 	<td>delete</td>
@@ -52,13 +42,14 @@
 		 Slot s = new Slot();
 		%>
 		<tr bgcolor="<%=color[i%2]%>">
-			<td><%=s.getBeginning() %></td>
-			<td><%=s.getDuration() %></td>
 			<td><%=s.getId() %></td>
 			<td><%=s.getName() %></td>
-			<td><%=s.getType() %></td>
-			<td><a href="modifierSlot.jsp?name=<%=s.getName() %>&beginning=<%=s.getBeginning() %>&duration=<%=s.getDuration() %>&type=<%=s.getType() %>">Modifier Slot</a></td>
-			<td><a onclick=window.confirm("Are u sure to delete?") href="SlotServlet?flag=delSlot&id=<%=s.getId()%>">Delete slot</a></td>
+			<td><%=s.getBeginning() %></td>
+			<td><%=s.getDuration() %></td>
+			<td><%=s.getTeacher().getName() %></td>
+			<td><%=s.getType() %></td>			
+			<td><a href="ModifierSlot.jsp?id=<%=s.getId() %>&name=<%=s.getName() %>&beginning=<%=s.getBeginning() %>&duration=<%=s.getDuration() %>&teacher=<%=s.getTeacher() %>&type=<%=s.getType() %>">Modifier Slot</a></td>
+			<td><a href="SlotServlet?flag=delSlot&id=<%=s.getId()%>">Delete slot</a></td>			
 		</tr>
 		<% 
 	}
@@ -67,9 +58,6 @@
 </table>
 
 
-<% 
-//int date=Integer.parseInt((String)request.getAttribute("date"));
-%>
 
 </body>
 </html>
