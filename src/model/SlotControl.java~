@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.*;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
-import database.DatabaseInterface;
+import controller.DatabaseInterface;
 
 public class SlotControl {
 	//prepare statement
@@ -25,11 +25,14 @@ public class SlotControl {
 	public boolean delSlotById(int id) {
 		boolean b= false;
 		try {
+<<<<<<< HEAD
 			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
 			di.connect();
 			ct=di.getConnection();
+=======
 			//�õ�����
 		/*	ct=new ConnDB().getConn();
+>>>>>>> 0eb08112210438d1764472cd03aa7e50b49da9dc
 			sm=ct.createStatement();
 			
 			int a=sm.executeUpdate("delete from Slot where id='"+id+"'");
@@ -46,7 +49,7 @@ public class SlotControl {
 		return b;
 	}
 
-	public boolean addSlot(String name, DateUsed beginning, int duration, Person teacher,
+	public boolean addSlot(String name, Date beginning, int duration, Person teacher,
 			String type) {
 		boolean b= false;
 		try {
@@ -70,7 +73,7 @@ public class SlotControl {
 		return b;
 	}
 
-	public boolean modifierSlot(int id, String name, DateUsed beginning, int duration, Person teacher,
+	public boolean modifierSlot(int id, String name, Date beginning, int duration, Person teacher,
 			String type) {
 		boolean b= false;
 		try {
