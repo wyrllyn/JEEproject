@@ -122,6 +122,12 @@ public class DateUsed implements Comparable {
 		// TODO later before or after
 		return -1;
 	}
+
+	@Override
+	public String toString() {
+		return "DateUsed [hours=" + hours + ", minutes=" + minutes + ", day="
+				+ day + "]";
+	}
 	
 	//used for some manual tests, to remove later
 /*	public static void main (String args[]){
