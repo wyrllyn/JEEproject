@@ -3,15 +3,20 @@ package model;
 import java.util.Date;
 
 public class Slot {
+	private int id;
+	private String name;
 	private DateUsed beginning;
 	private int duration;
-	private int id; 
 	private Person teacher;
-	private String name;
 	private String type; //CM, TD etc.
 	
 	public Slot() {
-		
+		this.name = "";
+		this.setBeginning(null);
+		this.setDuration(0);
+		this.setTeacher(new Person());
+		this.getTeacher().setName("");
+		this.setType("");
 	}
 	
 
