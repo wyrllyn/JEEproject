@@ -123,6 +123,28 @@ public class DateUsed implements Comparable {
 				+ day + "]";
 	}
 	
+	//used for some manual tests, to remove later
+/*	public static void main (String args[]){
+		System.out.println("test");
+		DateUsed du = new DateUsed();
+		DateUsed ds = new DateUsed();
+		int ud = 65;
+		int sd = 50;
+		
+		
+		du.setDay(Days.LUNDI);
+		du.setHours(7);
+		du.setMinutes(0);
+		ds.setDay(Days.LUNDI);
+		ds.setHours(8);
+		ds.setMinutes(0);
+		
+		System.out.println(du.includedInto(ud, ds, sd));
+		
+		
+		
+	}*/
+	
 	
 
 }
