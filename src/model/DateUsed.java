@@ -6,14 +6,20 @@ public class DateUsed implements Comparable {
 	private Days day;
 	
 	public DateUsed() {
-		init();
+		this.hours = 9;
+		this.minutes = 30;
+		this.day = Days.LUNDI;
 	}	
 	
-	private void init() {
-		this.hours = 0;
-		this.minutes = 0;
-		this.day = Days.LUNDI;
+	
+
+	public DateUsed(Days beginday, int beginhours, int beginminutes) {
+		setDay(beginday);
+		setHours(beginhours);
+		setMinutes(beginminutes);	
 	}
+
+
 
 	public DateUsed calcutateEnd(int duration){
 		DateUsed end = new DateUsed();

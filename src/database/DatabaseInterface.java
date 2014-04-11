@@ -21,6 +21,9 @@ public class DatabaseInterface {
 	
 	private Connection connection;
 	
+	
+
+
 	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
 	protected static final String DEFAULT_URL = "jdbc:sqlite:db/jee.db";
@@ -223,5 +226,9 @@ public class DatabaseInterface {
 			e.printStackTrace();
 		}
 		return slots;
+	}
+	
+	public Connection getConnection() {
+		return connection;
 	}
 }

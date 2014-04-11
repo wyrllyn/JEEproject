@@ -8,7 +8,9 @@ public class Person {
 	private String password;
 	
 	public Person() {
-		
+		this.username="";
+		this.type="";
+		this.password="";
 	}
 
 	public String getName() {

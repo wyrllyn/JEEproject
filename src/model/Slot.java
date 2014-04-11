@@ -11,12 +11,13 @@ public class Slot {
 	private String type; //CM, TD etc.
 	
 	public Slot() {
-		this.name = "";
-		this.setBeginning(null);
-		this.setDuration(0);
+		this.id = 0;
+		this.name = "J2EE";
+		this.setBeginning(new DateUsed());
+		this.setDuration(120);
 		this.setTeacher(new Person());
-		this.getTeacher().setName("");
-		this.setType("");
+		this.getTeacher().setName("Goeffon");
+		this.setType("TP");
 	}
 	
 

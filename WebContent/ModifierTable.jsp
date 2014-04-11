@@ -28,7 +28,7 @@
 <tr bgcolor="pink">
 	<td>id</td>
 	<td>name</td>
-	<td>time</td>
+	<td>Beginning</td>
 	<td>duration</td>
 	<td>teacher</td>
 	<td>type</td>
@@ -39,17 +39,27 @@
 <%
 	String[] color={"silver","pink"};
 	for(int i=0;i<5;i++){
-		 Slot s = new Slot();
+		 Slot slot = new Slot();
 		%>
 		<tr bgcolor="<%=color[i%2]%>">
-			<td><%=s.getId() %></td>
-			<td><%=s.getName() %></td>
-			<td><%=s.getBeginning() %></td>
-			<td><%=s.getDuration() %></td>
-			<td><%=s.getTeacher().getName() %></td>
-			<td><%=s.getType() %></td>			
-			<td><a href="ModifierSlot.jsp?id=<%=s.getId() %>&name=<%=s.getName() %>&beginning=<%=s.getBeginning() %>&duration=<%=s.getDuration() %>&teacher=<%=s.getTeacher() %>&type=<%=s.getType() %>">Modifier Slot</a></td>
-			<td><a href="SlotServlet?flag=delSlot&id=<%=s.getId()%>">Delete slot</a></td>			
+			<td><%=slot.getId() %></td>
+			<td><%=slot.getName() %></td>
+			<td><%=slot.getBeginning().getDay()+" "
+			+slot.getBeginning().getHours()+"H "
+			+slot.getBeginning().getMinutes()%></td>
+			<td><%=slot.getDuration() %></td>
+			<td><%=slot.getTeacher().getName() %></td>
+			<td><%=slot.getType() %></td>	
+			<td><a href="ModifierSlot.jsp?id=<%=slot.getId() %>
+			&name=<%=slot.getName() %>
+			&beginday=<%=slot.getBeginning().getDay() %>
+			&beginhours=<%=slot.getBeginning().getHours() %>
+			&beginminutes=<%=slot.getBeginning().getMinutes() %>
+			&duration=<%=slot.getDuration() %>
+			&teacher=<%=slot.getTeacher() %>
+			&type=<%=slot.getType() %>">Modifier Slot</a></td>		
+			
+			<td><a href="SlotServlet?flag=delSlot&id=<%=slot.getId()%>">Delete slot</a></td>			
 		</tr>
 		<% 
 	}
