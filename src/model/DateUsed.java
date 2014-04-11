@@ -1,13 +1,5 @@
 package model;
 
-enum Days {
-	LUNDI,
-	MARDI,
-	MERCREDI,
-	JEUDI,
-	VENDREDI
-};
-
 public class DateUsed implements Comparable {
 	private int hours;
 	private int minutes;

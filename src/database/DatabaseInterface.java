@@ -6,9 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import util.DateUtil;
+import model.DateUsed;
 import model.Room;
+import model.Slot;
 
 public class DatabaseInterface {
 	private String url;
@@ -54,7 +58,7 @@ public class DatabaseInterface {
 	
 	/**
 	 * Retrieves or creates the master DBI instance.
-	 * @return 
+	 * @return DatabaseInterface
 	 */
 	public static DatabaseInterface getInstance() {
 		if (instance == null) {
@@ -194,5 +198,30 @@ public class DatabaseInterface {
 		return rooms;
 	}
 	
-	
+	public List<Slot> getSlots() {
+		List<Slot> slots = new ArrayList<Slot>();
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Slot;";
+			ResultSet result = statement.executeQuery(query);
+			while (result.next()) {
+				Slot slot = new Slot();
+				int id = Integer.parseInt(result.getString("id"));
+				slot.setId(id);
+				
+				Date date = new Date(result.getLong("beginning"));
+				DateUsed beginning = DateUtil.createDateUsed(date);
+				slot.setBeginning(beginning);
+				
+				slot.setDuration(result.getInt("duration"));
+				slot.setName(result.getString("name"));
+				slot.setType(result.getString("class_type"));
+				
+				slots.add(slot);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return slots;
+	}
 }
