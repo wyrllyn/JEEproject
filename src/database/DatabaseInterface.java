@@ -11,6 +11,7 @@ import java.util.List;
 
 import util.DateUtil;
 import model.DateUsed;
+import model.Person;
 import model.Room;
 import model.Slot;
 
@@ -71,7 +72,11 @@ public class DatabaseInterface {
 	 */
 	
 	public void setUrl(String url) {
-		this.url = "jdbc:sqlite:" + url + "db/jee.db";
+		this.url = url;
+	}
+	
+	public Connection getConnection() {
+		return connection;
 	}
 
 	/*
@@ -223,8 +228,35 @@ public class DatabaseInterface {
 		}
 		return slots;
 	}
-
-	public Connection getConnection() {
-		return connection;
+	
+	/**
+	 * Retrieves the list of users that are teachers.
+	 * @return A List of User.
+	 */
+	public List<Person> getTeachers() {
+		List<Person> teachers = new ArrayList<Person>();
+		
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT User.id, name FROM Teacher, User"
+					+ " WHERE User.id = user_id;";
+			ResultSet result = statement.executeQuery(query);
+			while (result.next()) {
+				Person teacher = new Person();
+				int id = result.getInt("id");
+				teacher.setId(id);
+				
+				teacher.setName(result.getString("name"));
+				teacher.setPassword("");
+				teacher.setType("prof");
+				
+				teachers.add(teacher);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return teachers;
 	}
+
 }
