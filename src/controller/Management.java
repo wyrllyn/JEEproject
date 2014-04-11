@@ -1,12 +1,7 @@
 package controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import org.apache.tiles.request.collection.KeySet;
 
 import model.DateUsed;
 import model.FutureTimetable;
@@ -96,33 +91,16 @@ public class Management {
 	}
 	
 	public boolean conflictOfTime (Slot slot, int duration, DateUsed beginning) {
-		if(slot.getBeginning().compareTo(beginning) == 0){
+		//check if a slot is included into another
+		if(slot.getBeginning().includedInto(slot.getDuration(), beginning, duration) ||
+				beginning.includedInto(duration, slot.getBeginning(), slot.getDuration())){
 			return true;
 		}
-		
-		//TODO: compare if dates + duration are in conflict or not
-		DateUsed endSlot = slot.getBeginning().calcutateEnd(slot.getDuration());
-		DateUsed endTest = beginning.calcutateEnd(duration);
-		
-		// if says are different, no conflict !
-		if(endSlot.getDay() != endTest.getDay() ||
-				slot.getBeginning().getDay() != beginning.getDay()){
-			return false;
-		}
-			
 		return false;
 	}
 	
 	public void removeSlot(Timetable table, Slot slotToRemove){
 		
 	}
-	
-	/*public static void main(){
-
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm");
-		Date d1 = df.parse(interviewList.get(37).getTime());
-		long t = date.getTime();
-		Date afterAddingTenMins=new Date(t + (10 * ONE_MINUTE_IN_MILLIS));
-	}*/
 
 }
