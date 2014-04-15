@@ -48,40 +48,102 @@ public class Management {
 	}
 
 	public void createTimeTable(FutureTimetable future){
+		// will be added into timetables
 		Timetable toAdd = new Timetable();
 		toAdd.setGroupName(future.getGroupName());
+		Map<Slot,Room> construction = new TreeMap<>();
+		
+		// to avoid error
 		int size = future.getToSet().size();
-
-		// creation => to 8:00 to 18:30 // 10minutes of break between classes
-		// begin with LUNDI, check all of the hours. IF already used => MARDI etc.
+		
+		//to test slot and rooms
+		Slot tempSlot = new Slot();
+		Room thisRoom = new Room();
+		
+		DateUsed temp = new DateUsed();
 		
 		while(size > 0){
 			//loop to choose the biggest class (in term of duration)
+			int biggest = 0;
+			int thisOne = -1;
+			for (int i = 0; i < future.getToSet().size(); i++){
+				if (future.getToSet().get(i).getDuration() > biggest) {
+					biggest = future.getToSet().get(i).getDuration();
+					thisOne = i;
+				}
+			}
 			
-			//use DateUsed for a date
-			//after a date is chosen => room with method			
-			
-			//if an element of future is added => size --	
+			//try a date
+			tempSlot = future.getToSet().get(thisOne);
+			temp = futureDate(toAdd, tempSlot);	
+			//check if teacher available			
+			if (!isThisPersonAvailable(tempSlot.getTeacher(),
+					tempSlot.getDuration(), temp)){
+				for (int i = 0; i < future.getToSet().size(); i++ ){
+					tempSlot = future.getToSet().get(thisOne);
+					temp = futureDate(toAdd, tempSlot);
+					if (isThisPersonAvailable(tempSlot.getTeacher(),
+					tempSlot.getDuration(), temp)){
+						break;
+					}
+				}
+			}
+			//after a date is chosen => room with method
+			for (int i = 0; i < rooms.size() ; i++){
+				if (isThisRoomEmpty(rooms.get(i), tempSlot.getDuration(), temp)){
+					thisRoom = rooms.get(i);
+					break;
+				}
+			}
+			//add this element
+			tempSlot.setBeginning(temp);
+			construction.put(tempSlot, thisRoom);
+			//of future is added => size --	
 			//remove it from future
+			size--;
+			future.getToSet().remove(thisOne);
+
 		}
 		
-		
+		toAdd.setTimetable(construction);
 		timetables.add(toAdd);		
 	}
 	
 	private DateUsed futureDate(Timetable t, Slot s) {
-		//check for teacher here ?
 		DateUsed d = new DateUsed();
-		if (t.getTimetable().size() == 0){
+		if (possible(Days.LUNDI, s.getDuration(), t).getHours() != -1){
+			d.setDay(Days.LUNDI);
+			d.setHours(possible(Days.LUNDI, s.getDuration(), t).getHours());
+			d.setMinutes(possible(Days.LUNDI, s.getDuration(), t).getMinutes());			
+		}
+		else if (possible(Days.MARDI, s.getDuration(), t).getHours() != -1){
+			d.setDay(Days.MARDI);
+			d.setHours(possible(Days.MARDI, s.getDuration(), t).getHours());
+			d.setMinutes(possible(Days.MARDI, s.getDuration(), t).getMinutes());	
+		}
+		else if (possible(Days.MERCREDI, s.getDuration(), t).getHours() != -1){
+			d.setDay(Days.MERCREDI);
+			d.setHours(possible(Days.MERCREDI, s.getDuration(), t).getHours());
+			d.setMinutes(possible(Days.MERCREDI, s.getDuration(), t).getMinutes());	
+		}
+		else if (possible(Days.JEUDI, s.getDuration(), t).getHours() != -1){
+			d.setDay(Days.JEUDI);
+			d.setHours(possible(Days.JEUDI, s.getDuration(), t).getHours());
+			d.setMinutes(possible(Days.JEUDI, s.getDuration(), t).getMinutes());	
+		}
+		else if (possible(Days.VENDREDI, s.getDuration(), t).getHours() != -1){
+			d.setDay(Days.VENDREDI);
+			d.setHours(possible(Days.VENDREDI, s.getDuration(), t).getHours());
+			d.setMinutes(possible(Days.VENDREDI, s.getDuration(), t).getMinutes());	
 		}
 		else {
-			
+			System.err.println("Problem in method DateUsed, maybe possible() method");
 		}
 		
 		return d;		
 	}
 	
-	//Rename this method / used to know if we can set a duration into a day
+	//Rename this method / used to know if we can set a slot into a day
 	private CompleteHours possible(Days day, int duration, Timetable t){
 		// invalid hour if day is full 
 		CompleteHours toReturn = new CompleteHours();
@@ -135,10 +197,20 @@ public class Management {
 							ap.setHours(h);
 							ap.setMinutes(0);
 						}
-						
-						//comparaison TODO
-						// with t and ap I guess
-						//ap.calcutateEnd(duration);
+						//comparison, is the beginning date + the duration included ?
+						for ( Slot key : t.getTimetable().keySet()){
+							if (key.getBeginning().includedInto(key.getDuration(),
+									ap, duration) ||
+									ap.includedInto(duration, key.getBeginning(), 
+									key.getDuration())){
+								break;
+							}
+							else {
+								toReturn.setHours(ap.getHours());
+								toReturn.setMinutes(ap.getMinutes());
+								return toReturn;
+							}
+						}
 					}
 				}
 			}
