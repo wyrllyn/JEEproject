@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import util.DateUtil;
 import model.DateUsed;
 import model.Person;
 import model.Room;
 import model.Slot;
+import model.Timetable;
 
 public class DatabaseInterface {
 	private String url;
@@ -303,6 +306,9 @@ public class DatabaseInterface {
 					+ " WHERE User.name = \""
 					+ name + "\" AND User.id = Teacher.user_id;";
 			
+
+		
+		
 			ResultSet result = statement.executeQuery(query);
 			result.next();
 			Person teacher = new Person();
@@ -318,6 +324,52 @@ public class DatabaseInterface {
 			e.printStackTrace();
 		}
 		instance.disconnect();
+		return null;
+	}
+
+	public Timetable getTimetableByGroup(String groupName) {
+		connect();
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Timetable, Group_, TimetableMap"
+					+ " WHERE Group_.name = \""
+					+ groupName + "\";";
+			ResultSet result = statement.executeQuery(query);
+			
+			Map<Slot, Room> timetableMap = new HashMap<Slot, Room>();
+			while (result.next()) {
+				int slot_id = result.getInt("slot_id");
+				int room_id = result.getInt("room_id");
+				Slot slot = getSlotById(slot_id);
+				Room room = getRoomById(room_id);
+				timetableMap.put(slot, room);
+			}
+			Timetable timetable = new Timetable();
+			timetable.setGroupName(groupName);
+			timetable.setTimetable(timetableMap);
+			
+			return timetable;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Room getRoomById(int id) {
+		connect();
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Room WHERE id = "
+					+id + ";";
+			ResultSet result = statement.executeQuery(query);
+			result.next();
+			Room room = new Room();
+			room.setId(id);
+			
+			return room;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

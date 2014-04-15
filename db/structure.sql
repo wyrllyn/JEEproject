@@ -44,7 +44,18 @@ create table Slot(
 );
 
 create table Timetable(
-	id integer primary key autoincrement
+	id integer primary key autoincrement,
+	group_id integer not null,
+	foreign key (group_id) references Group_(id)
+);
+
+create table TimetableMap(
+	timetable_id integer not null,
+	slot_id integer not null,
+	room_id integer not null,
+	foreign key (timetable_id) references Timetable(id),
+	foreign key (slot_id) references Slot(id),
+	foreign key (room_id) references Room(id)
 );
 
 -- All Created --
