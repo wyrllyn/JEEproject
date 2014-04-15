@@ -1,0 +1,12 @@
+1) Penser à fournir .war fichiers mise en prod
+
+2) Document doit contenir:
+	technos utilisés (version, framework)
+	déploiement
+	diagramme classe / BDD
+
+3) Preparer une démo
+
+4) Votre code doit être accessible
+-----------------------------------
+5) Respecter les consignes du sujet
