@@ -232,6 +232,31 @@ public class DatabaseInterface {
 		return slots;
 	}
 	
+	public Slot getSlotById(int id) {
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Slot WHERE id = "
+					+id + ";";
+			ResultSet result = statement.executeQuery(query);
+			result.next();
+			Slot slot = new Slot();
+			slot.setId(id);
+			
+			Date date = new Date(result.getLong("beginning"));
+			DateUsed beginning = DateUtil.createDateUsed(date);
+			slot.setBeginning(beginning);
+			
+			slot.setDuration(result.getInt("duration"));
+			slot.setName(result.getString("name"));
+			slot.setType(result.getString("class_type"));
+			
+			return slot;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * Retrieves the list of users that are teachers.
 	 * @return A List of User.
