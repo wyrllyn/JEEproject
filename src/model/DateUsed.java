@@ -1,8 +1,7 @@
 package model;
 
 public class DateUsed implements Comparable {
-	private int hours;
-	private int minutes;
+	private CompleteHours hour = new CompleteHours();
 	private Days day;
 	
 	public DateUsed() {
@@ -10,15 +9,15 @@ public class DateUsed implements Comparable {
 	}	
 	
 	private void init() {
-		this.hours = 0;
-		this.minutes = 0;
+		this.hour.setHours(0);
+		this.hour.setMinutes(0);
 		this.day = Days.LUNDI;
 	}
 
 	public DateUsed calcutateEnd(int duration){
 		DateUsed end = new DateUsed();
-		int min = this.minutes + duration;
-		int h = this.hours;
+		int min = this.hour.getMinutes() + duration;
+		int h = this.hour.getHours();
 		Days dayE = this.day;
 		if (min >= 60) {
 			min -= 60;
@@ -53,16 +52,16 @@ public class DateUsed implements Comparable {
 	}
 	
 	public int getHours() {
-		return hours;
+		return hour.getHours();
 	}
 	public void setHours(int hours) {
-		this.hours = hours;
+		this.hour.setHours(hours);
 	}
 	public int getMinutes() {
-		return minutes;
+		return hour.getMinutes();
 	}
 	public void setMinutes(int minutes) {
-		this.minutes = minutes;
+		this.hour.setMinutes(minutes);
 	}
 	public Days getDay() {
 		return day;
@@ -125,7 +124,7 @@ public class DateUsed implements Comparable {
 
 	@Override
 	public String toString() {
-		return "DateUsed [hours=" + hours + ", minutes=" + minutes + ", day="
+		return "DateUsed [hours=" + hour.getHours() + ", minutes=" + hour.getMinutes() + ", day="
 				+ day + "]";
 	}
 	

@@ -89,6 +89,11 @@ public class Management {
 		Map<Integer[][], Integer[][]> occupied;
 		for (Slot key : t.getTimetable().keySet()) {
 			if(key.getBeginning().getDay() == day) {
+				int begH = key.getBeginning().getHours();
+				int begM = key.getBeginning().getMinutes();
+				int endH = key.getBeginning().calcutateEnd(key.getDuration()).getHours();
+				int endM = key.getBeginning().calcutateEnd(key.getDuration()).getMinutes();
+				
 				
 			}
 		}
