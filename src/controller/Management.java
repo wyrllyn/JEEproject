@@ -2,7 +2,9 @@ package controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
+import model.CompleteHours;
 import model.DateUsed;
 import model.Days;
 import model.FutureTimetable;
@@ -71,9 +73,6 @@ public class Management {
 		//check for teacher here ?
 		DateUsed d = new DateUsed();
 		if (t.getTimetable().size() == 0){
-			d.setDay(Days.LUNDI);
-			d.setHours(8);
-			d.setMinutes(0);
 		}
 		else {
 			
@@ -83,17 +82,85 @@ public class Management {
 	}
 	
 	//Rename this method / used to know if we can set a duration into a day
-	private boolean possible(Days day, int duration, Timetable t){
-		//find how to mark a slot as occupied
-		// don't forget pauses => must have 10 minutes between classes and 1:30 around 12
-		Map<Integer[][], Integer[][]> occupied;
+	private CompleteHours possible(Days day, int duration, Timetable t){
+		// invalid hour if day is full 
+		CompleteHours toReturn = new CompleteHours();
+		toReturn.setHours(-1);
+		toReturn.setMinutes(-1);
+		// to mark which hours are occupied
+		Map<CompleteHours, CompleteHours> occupied =
+				new TreeMap<CompleteHours, CompleteHours>(occupiedMap(day, t));
+		
+		boolean occ = false;
+		DateUsed du = new DateUsed();
+		du.setDay(day);
+		
+		DateUsed ap = new DateUsed();
+		
+		if(occupied.size() == 0) {
+			toReturn.setHours(8);
+			toReturn.setMinutes(0);
+			return toReturn;
+		}
+		else {
+			// for each valid hours
+			for (int h = 8; h <= 18; h++) {
+				// boolean if this hours is occupied
+				occ = false;
+				// if hour is 12 or 13 lunch
+				if (!(h == 12) && !(h == 13)) {
+					// for each classes already on the timetable
+					for (CompleteHours key : occupied.keySet()){
+						// if hour matches and end of class is not at the same hour, break & occupied
+						if (key.getHours() == h && !(occupied.get(key).getHours() == h)){
+							if(key.getMinutes() <= 30) {
+								occ = true;
+								break;
+							}
+						}
+						// and class ends before the end of hour h
+						else if (occupied.get(key).getHours() == h){
+							int m = occupied.get(key).getMinutes();
+							du.setHours(h);
+							du.setMinutes(m);
+							// 10 minutes of break, ap will be used							
+							ap = du.calcutateEnd(10);
+							break;
+						}
+					}
+					// if not occupied
+					if (!occ){
+						if (du.getHours() != h){
+							// if not occupied and du.getHours !=h then h is totally free
+							ap.setHours(h);
+							ap.setMinutes(0);
+						}
+						
+						//comparaison TODO
+						// with t and ap I guess
+						//ap.calcutateEnd(duration);
+					}
+				}
+			}
+		}		
+		return toReturn;
+	}
+
+	private Map<CompleteHours, CompleteHours> occupiedMap(Days day, Timetable t) {
+		Map<CompleteHours, CompleteHours> occ = new TreeMap<>();
+		CompleteHours beg = new CompleteHours();
+		CompleteHours end = new CompleteHours();
 		for (Slot key : t.getTimetable().keySet()) {
 			if(key.getBeginning().getDay() == day) {
-				
+				beg.setHours(key.getBeginning().getHours());
+				beg.setMinutes(key.getBeginning().getMinutes());
+				end.setHours(key.getBeginning().calcutateEnd(key.getDuration()).getHours());
+				end.setMinutes(key.getBeginning().calcutateEnd(key.getDuration()).getMinutes());
+
+				occ.put(beg, end);
 			}
 		}
-		
-		return true;
+		return occ;
 	}
 	
 	

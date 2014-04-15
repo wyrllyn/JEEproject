@@ -232,8 +232,10 @@ public class DatabaseInterface {
 		return slots;
 	}
 	
-
-	
+	/**
+	 * Retrieves the list of users that are teachers.
+	 * @return A List of User.
+	 */
 	public List<Person> getTeachers() {
 		List<Person> teachers = new ArrayList<Person>();
 		
@@ -260,5 +262,27 @@ public class DatabaseInterface {
 		return teachers;
 	}
 
+	public Person getTeacherByName(String name) {
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT User.id, name FROM Teacher, User"
+					+ " WHERE User.name = "
+					+ name + ";";
+			ResultSet result = statement.executeQuery(query);
+			result.next();
+			Person teacher = new Person();
+			int id = result.getInt("id");
+			teacher.setId(id);
+			
+			teacher.setName(result.getString("name"));
+			teacher.setPassword("");
+			teacher.setType("prof");
+			
+			return teacher;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
