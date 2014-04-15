@@ -7,6 +7,7 @@ import java.util.List;
 import model.Person;
 import model.Room;
 import model.Slot;
+import model.Timetable;
 
 import org.junit.After;
 import org.junit.Before;
@@ -41,6 +42,7 @@ public class TestsDBI {
 	
 	@Test
 	public void test_getTeacherByName() {
+		@SuppressWarnings("static-access")
 		Person teacher = dbi.getTeacherByName("Goeffon");
 		assertNotNull(teacher);
 		assertEquals("Goeffon", teacher.getName());
@@ -53,5 +55,11 @@ public class TestsDBI {
 		assertNotNull(slot);
 		assertEquals("CM", slot.getType());
 		assertEquals(80, slot.getDuration());
+	}
+	
+	@Test
+	public void test_getTimetableByGroup() {
+		Timetable timetable = dbi.getTimetableByGroup("M1 Info");
+		assertNotNull(timetable);
 	}
 }

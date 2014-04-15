@@ -22,5 +22,11 @@ insert into Room (size) values (50);
 insert into Room (size) values (50);
 -- Slot --
 insert into Slot (teacher_id, duration, class_type, beginning, name) values (1, 80, "CM", 0, "Your Death");
-
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "TD", 0, "La Muerte");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 120, "La Mort");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (1, 80, "TD", 120, "Das Mort");
+-- Timetable --
+insert into Timetable (group_id) values (2); -- M1 Info
+-- TimetableMap --
+insert into TimetableMap (timetable_id, slot_id, room_id) values (1, 1, 1);
 -- The End --

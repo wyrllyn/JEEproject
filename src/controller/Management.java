@@ -143,7 +143,13 @@ public class Management {
 		return d;		
 	}
 	
-	//Rename this method / used to know if we can set a slot into a day
+	/**
+	 * Rename this method / used to know if we can set a slot into a day
+	 * @param day
+	 * @param duration
+	 * @param t
+	 * @return
+	 */
 	private CompleteHours possible(Days day, int duration, Timetable t){
 		// invalid hour if day is full 
 		CompleteHours toReturn = new CompleteHours();
@@ -237,7 +243,13 @@ public class Management {
 	
 	
 	
-	// called into createTimeTable	
+	/**
+	 * called by createTimeTable	
+	 * @param room
+	 * @param duration
+	 * @param beginning
+	 * @return
+	 */
 	private boolean isThisRoomEmpty(Room room, int duration, DateUsed beginning){
 		for (int i = 0; i < timetables.size() ; i++) {
 			Map<Slot,Room> temp = timetables.get(i).getTimetable();
@@ -253,11 +265,16 @@ public class Management {
 		return true;
 	}
 	
-	// called into createTimeTable
-	
+	/**
+	 * called by createTimeTable
+	 * @param p
+	 * @param duration
+	 * @param beginning
+	 * @return
+	 */
 	public boolean isThisPersonAvailable(Person p, int duration, DateUsed beginning) {
 		for (int i = 0; i < timetables.size() ; i++) {
-			Map<Slot,Room> temp = timetables.get(i).getTimetable();
+			//Map<Slot,Room> temp = timetables.get(i).getTimetable();
 			for (Slot key : timetables.get(i).getTimetable().keySet()){
 				if(key.getTeacher().equals(p)){
 					// compare duration and beginning => if conflict return false else nothing
@@ -270,7 +287,13 @@ public class Management {
 		return true;
 	}
 	
-	//called into isThisPersonAvailable() & isThisRoomEmpty()
+	/**
+	 * called by isThisPersonAvailable() & isThisRoomEmpty()
+	 * @param slot
+	 * @param duration
+	 * @param beginning
+	 * @return
+	 */
 	private boolean conflictOfTime (Slot slot, int duration, DateUsed beginning) {
 		//check if a slot is included into another
 		if(slot.getBeginning().includedInto(slot.getDuration(), beginning, duration) ||
