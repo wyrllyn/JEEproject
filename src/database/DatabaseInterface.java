@@ -229,6 +229,10 @@ public class DatabaseInterface {
 		return slots;
 	}
 	
+	/**
+	 * Retrieves the list of users that are teachers.
+	 * @return A List of User.
+	 */
 	public List<Person> getTeachers() {
 		List<Person> teachers = new ArrayList<Person>();
 		
