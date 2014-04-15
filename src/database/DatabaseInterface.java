@@ -291,8 +291,8 @@ public class DatabaseInterface {
 		try {
 			Statement statement = connection.createStatement();
 			String query = "SELECT User.id, name FROM Teacher, User"
-					+ " WHERE User.name = "
-					+ name + ";";
+					+ " WHERE User.name = \""
+					+ name + "\";";
 			ResultSet result = statement.executeQuery(query);
 			result.next();
 			Person teacher = new Person();
