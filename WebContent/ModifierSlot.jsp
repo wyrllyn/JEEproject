@@ -31,7 +31,7 @@
 	private String type; //CM, TD etc.
 	-->
 
-<form action="SlotServlet?flag=modifyUser" method="post">
+<form action="SlotServlet?flag=modifySlot&teacher=<%=request.getAttribute("teacher")%>" method="post">
 
 	
 	<table>
@@ -61,7 +61,7 @@
 		</tr>
 		<tr>
 			<td bgcolor=silver>teacher</td>
-			<td><input type="text" name="silver" value="<%=request.getParameter("teacher") %>"></td>			
+			<td><input type="text" name="silver" value="<%=request.getParameter("teachername") %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=pink>type</td>

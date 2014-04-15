@@ -4,4 +4,5 @@ drop table Teacher;
 drop table Room;
 drop table Class;
 drop table Timetable;
+drop table Slot;
 -- All dropped --

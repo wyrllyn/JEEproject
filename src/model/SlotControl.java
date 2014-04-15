@@ -69,7 +69,7 @@ public class SlotControl {
 		return b;
 	}
 
-	public boolean modifierSlot(int id, String name, Days beginday, int beginhours, int beginminutes,
+	public boolean modifierSlot(int id, String name, DateUsed beginning,
 			int duration, Person teacher,String type) {
 		boolean b= false;
 		try {
@@ -78,7 +78,7 @@ public class SlotControl {
 			ct=di.getConnection();
 			sm=ct.createStatement();
 			
-			DateUsed beginning = new DateUsed(beginday,beginhours,beginminutes);
+			
 			
 			int a=sm.executeUpdate("update Slot set name='"+name+"',beginning='"+beginning+"',duration='"+duration+"',teacher='"+teacher+"',type='"+type+"' where id='"+id+"'");
 			

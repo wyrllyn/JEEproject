@@ -57,6 +57,7 @@
 			&beginminutes=<%=slot.getBeginning().getMinutes() %>
 			&duration=<%=slot.getDuration() %>
 			&teacher=<%=slot.getTeacher() %>
+			&teachername=<%=slot.getTeacher().getName() %>
 			&type=<%=slot.getType() %>">Modifier Slot</a></td>		
 			
 			<td><a href="SlotServlet?flag=delSlot&id=<%=slot.getId()%>">Delete slot</a></td>			

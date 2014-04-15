@@ -11,5 +11,14 @@ public class UserBeanControl {
 		else
 			return "etudiant";		
 	}
+	
+	public String checkTeacher(String teachername){
+		if(DatabaseInterface.getInstance().authenticateUser(username, password)){
+			return "prof";
+		}
+		else
+			return "etudiant";		
+	}
+	
 
 }
