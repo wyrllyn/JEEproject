@@ -22,6 +22,9 @@ public class DatabaseInterface {
 	
 	private Connection connection;
 	
+	
+
+
 	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
 	protected static final String DEFAULT_URL = "jdbc:sqlite:/home/etudiant/db/jee.db";
@@ -306,4 +309,5 @@ public class DatabaseInterface {
 		}
 		return null;
 	}
+
 }

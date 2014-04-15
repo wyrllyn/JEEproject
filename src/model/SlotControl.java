@@ -28,15 +28,15 @@ public class SlotControl {
 			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
 			di.connect();
 			ct=di.getConnection();
-			//�õ�����
-		/*	ct=new ConnDB().getConn();
+			
+			
 			sm=ct.createStatement();
 			
 			int a=sm.executeUpdate("delete from Slot where id='"+id+"'");
 			
 			if(a==1){				
 				b=true;
-			} */
+			} 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,8 +53,7 @@ public class SlotControl {
 			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
 			di.connect();
 			ct=di.getConnection();
-			sm=ct.createStatement();
-			
+			sm=ct.createStatement();			
 			
 			int a=sm.executeUpdate("insert into Slot values('"+name+"','"+beginning+"','"+duration+"','"+teacher+"','"+type+"')");
 			
@@ -70,14 +69,16 @@ public class SlotControl {
 		return b;
 	}
 
-	public boolean modifierSlot(int id, String name, DateUsed beginning, int duration, Person teacher,
-			String type) {
+	public boolean modifierSlot(int id, String name, DateUsed beginning,
+			int duration, Person teacher,String type) {
 		boolean b= false;
 		try {
 			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
 			di.connect();
 			ct=di.getConnection();
 			sm=ct.createStatement();
+			
+			
 			
 			int a=sm.executeUpdate("update Slot set name='"+name+"',beginning='"+beginning+"',duration='"+duration+"',teacher='"+teacher+"',type='"+type+"' where id='"+id+"'");
 			

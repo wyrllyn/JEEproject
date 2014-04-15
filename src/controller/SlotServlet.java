@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.DateUsed;
+import model.Days;
 import model.Person;
 import model.SlotControl;
 
@@ -54,7 +55,10 @@ String flag = request.getParameter("flag");
 		else if(flag.equals("addSlot")){
 		
 			String name = request.getParameter("name");		
-			DateUsed beginning = (DateUsed)request.getAttribute("beginning");				
+			Days beginday = (Days)request.getAttribute("beginday");
+			int beginhours = Integer.parseInt(request.getParameter("beginhours"));
+			int beginminutes = Integer.parseInt(request.getParameter("beginminutes"));
+			DateUsed beginning = new DateUsed(beginday,beginhours,beginminutes);				
 			int duration = Integer.parseInt(request.getParameter("duration"));
 			Person teacher = (Person) request.getAttribute("teacher");
 			String type = request.getParameter("type");
@@ -74,9 +78,15 @@ String flag = request.getParameter("flag");
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			String name = request.getParameter("name");
-			DateUsed beginning = (DateUsed)request.getAttribute("beginning");	
+			Days beginday = (Days)request.getAttribute("beginday");
+			int beginhours = Integer.parseInt(request.getParameter("beginhours"));
+			int beginminutes = Integer.parseInt(request.getParameter("beginminutes"));
+			DateUsed beginning = new DateUsed(beginday,beginhours,beginminutes);	
 			int duration = Integer.parseInt(request.getParameter("duration"));
-			Person teacher = (Person) request.getAttribute("teacher");
+			
+			String teachername = request.getParameter("teachername");
+			
+			
 			String type = request.getParameter("type");
 			
 			
