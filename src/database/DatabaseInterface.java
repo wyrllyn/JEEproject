@@ -20,8 +20,11 @@ public class DatabaseInterface {
 	private String user;
 	private String password;
 	
-	private Connection connection;
+	private static Connection connection;
 	
+	
+
+
 	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
 	protected static final String DEFAULT_URL = "jdbc:sqlite:/home/etudiant/db/jee.db";
@@ -229,6 +232,31 @@ public class DatabaseInterface {
 		return slots;
 	}
 	
+	public Slot getSlotById(int id) {
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Slot WHERE id = "
+					+id + ";";
+			ResultSet result = statement.executeQuery(query);
+			result.next();
+			Slot slot = new Slot();
+			slot.setId(id);
+			
+			Date date = new Date(result.getLong("beginning"));
+			DateUsed beginning = DateUtil.createDateUsed(date);
+			slot.setBeginning(beginning);
+			
+			slot.setDuration(result.getInt("duration"));
+			slot.setName(result.getString("name"));
+			slot.setType(result.getString("class_type"));
+			
+			return slot;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * Retrieves the list of users that are teachers.
 	 * @return A List of User.
@@ -257,6 +285,29 @@ public class DatabaseInterface {
 		}
 		
 		return teachers;
+	}
+
+	public static Person getTeacherByName(String name) {
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT User.id, name FROM Teacher, User"
+					+ " WHERE User.name = \""
+					+ name + "\";";
+			ResultSet result = statement.executeQuery(query);
+			result.next();
+			Person teacher = new Person();
+			int id = result.getInt("id");
+			teacher.setId(id);
+			
+			teacher.setName(result.getString("name"));
+			teacher.setPassword("");
+			teacher.setType("prof");
+			
+			return teacher;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

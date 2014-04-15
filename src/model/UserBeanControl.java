@@ -11,5 +11,15 @@ public class UserBeanControl {
 		else
 			return "etudiant";		
 	}
+	
+	public Person checkTeacher(String teachername){
+		Person teacher = DatabaseInterface.getTeacherByName(teachername);
+		if(teacher!=null){
+			return teacher;
+		}
+		else
+			return null;		
+	}
+	
 
 }
