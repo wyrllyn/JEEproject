@@ -12,12 +12,13 @@ public class UserBeanControl {
 			return "etudiant";		
 	}
 	
-	public String checkTeacher(String teachername){
-		if(DatabaseInterface.getInstance().authenticateUser(username, password)){
-			return "prof";
+	public Person checkTeacher(String teachername){
+		Person teacher = DatabaseInterface.getTeacherByName(teachername);
+		if(teacher!=null){
+			return teacher;
 		}
 		else
-			return "etudiant";		
+			return null;		
 	}
 	
 

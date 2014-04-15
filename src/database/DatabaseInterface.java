@@ -20,7 +20,7 @@ public class DatabaseInterface {
 	private String user;
 	private String password;
 	
-	private Connection connection;
+	private static Connection connection;
 	
 	
 
@@ -262,7 +262,7 @@ public class DatabaseInterface {
 		return teachers;
 	}
 
-	public Person getTeacherByName(String name) {
+	public static Person getTeacherByName(String name) {
 		try {
 			Statement statement = connection.createStatement();
 			String query = "SELECT User.id, name FROM Teacher, User"
