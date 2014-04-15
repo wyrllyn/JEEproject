@@ -15,6 +15,7 @@ import model.DateUsed;
 import model.Days;
 import model.Person;
 import model.SlotControl;
+import model.UserBeanControl;
 
 /**
  * Servlet implementation class SlotServlet
@@ -85,7 +86,8 @@ String flag = request.getParameter("flag");
 			int duration = Integer.parseInt(request.getParameter("duration"));
 			
 			String teachername = request.getParameter("teachername");
-			
+			UserBeanControl ubc = new UserBeanControl();
+			Person teacher = ubc.checkTeacher(teachername);
 			
 			String type = request.getParameter("type");
 			
