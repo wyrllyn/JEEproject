@@ -45,15 +45,15 @@
 		</tr>
 		<tr>
 			<td bgcolor=silver>Begin day</td>
-			<td><input type="text" name="day" value="<%=request.getParameter("beginday") %>"></td>			
+			<td><input type="text" name="beginday" value="<%=request.getParameter("beginday") %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=pink>Begin hour</td>
-			<td><input type="text" name="hours" value="<%=request.getParameter("beginhours") %>"></td>			
+			<td><input type="text" name="beginhours" value="<%=request.getParameter("beginhours") %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=silver>Begin minutes</td>
-			<td><input type="text" name="minutes" value="<%=request.getParameter("beginminutes") %>"></td>			
+			<td><input type="text" name="beginminutes" value="<%=request.getParameter("beginminutes") %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=pink>duration</td>
@@ -61,7 +61,7 @@
 		</tr>
 		<tr>
 			<td bgcolor=silver>teacher</td>
-			<td><input type="text" name="silver" value="<%=request.getParameter("teachername") %>"></td>			
+			<td><input type="text" name="teachername" value="<%=request.getParameter("teachername") %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=pink>type</td>

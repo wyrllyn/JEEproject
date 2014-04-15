@@ -28,7 +28,10 @@ public class TestsDBI {
 	@Test
 	public void test_connect() {
 		dbi.connect();
-		assertTrue(dbi.authenticateUser("test", "password"));
+		boolean type = false;
+		if(dbi.authenticateUser("test", "password")!=2)
+			type = true;
+		assertTrue(type);
 	}
 
 	@Test

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <!--java package import-->
-<%@ page import="java.sql.*,java.util.*,model.*" %>  
+<%@ page import="java.sql.*,java.util.*,model.*,database.*" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,8 +38,14 @@
 
 <%
 	String[] color={"silver","pink"};
-	for(int i=0;i<5;i++){
-		 Slot slot = new Slot();
+	//Slot[] slots = new Slot[100];
+	//DatabaseInterface di = new DatabaseInterface();
+	DatabaseInterface di = DatabaseInterface.getInstance();
+	
+	di.connect();
+	List<Slot> slots = di.getSlots();
+	for(int i=0;i<slots.size();i++){
+		 Slot slot = slots.get(i);
 		%>
 		<tr bgcolor="<%=color[i%2]%>">
 			<td><%=slot.getId() %></td>
@@ -64,6 +70,7 @@
 		</tr>
 		<% 
 	}
+	di.disconnect();
 %>
 
 </table>

@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,8 +39,12 @@ public class LoginServlet extends HttpServlet {
 		if(type.equals("prof")){
 			request.getRequestDispatcher("ModifierTable.jsp").forward(request, response);
 		}
-		else{
+		else if(type.equals("etudiant")){
 			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+		else{
+			JOptionPane.showMessageDialog(null,"Name or password wrong!");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	
 	}

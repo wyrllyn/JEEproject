@@ -162,24 +162,32 @@ public class DatabaseInterface {
 	 * @param userpassword
 	 * @return true if the user has been authenticated.
 	 */
-	public boolean authenticateUser(String username, String userpassword) {
+	public int authenticateUser(String username, String userpassword) {
 		connect();
 		try {
-			Statement statement = connection.createStatement();
-			String query = "SELECT count(*) FROM User "
+			Statement statement0 = connection.createStatement();
+			String query0 = "SELECT count(*) FROM User, Teacher "
 					+ "WHERE name = \"" + username + "\" AND password = \"" + userpassword
-					+ "\";";
-			ResultSet result = statement.executeQuery(query);
-			result.next();
-			if (result.getInt(1) == 1) { //hackish crap
-				return true;
-			} else {
-				return false;
+					+ "\" AND User.id = Teacher.user_id;";
+			ResultSet result0 = statement0.executeQuery(query0);
+			result0.next();
+			if (result0.getInt(1) == 1) { //prof
+				return 0;
 			}
+			Statement statement1 = connection.createStatement();
+			String query1 = "SELECT count(*) FROM User "
+					+ "WHERE name = \"" + username + "\" AND password = \"" + userpassword
+					+ "\" ";
+			ResultSet result1 = statement1.executeQuery(query1);			
+			result1.next();
+			if (result1.getInt(1) == 1){ //etudiant
+				return 1;
+			}
+							
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return 2;
 	}
 	
 	/**
@@ -288,11 +296,13 @@ public class DatabaseInterface {
 	}
 
 	public static Person getTeacherByName(String name) {
+		instance.connect();
 		try {
 			Statement statement = connection.createStatement();
-			String query = "SELECT User.id, name FROM Teacher, User"
-					+ " WHERE User.name = "
-					+ name + ";";
+			String query = "SELECT User.id, name ,password FROM Teacher, User"
+					+ " WHERE User.name = \""
+					+ name + "\" AND User.id = Teacher.user_id;";
+			
 			ResultSet result = statement.executeQuery(query);
 			result.next();
 			Person teacher = new Person();
@@ -300,13 +310,14 @@ public class DatabaseInterface {
 			teacher.setId(id);
 			
 			teacher.setName(result.getString("name"));
-			teacher.setPassword("");
+			teacher.setPassword("password");
 			teacher.setType("prof");
-			
+			//System.out.println(teacher);
 			return teacher;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		instance.disconnect();
 		return null;
 	}
 

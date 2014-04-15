@@ -85,9 +85,10 @@ String flag = request.getParameter("flag");
 			DateUsed beginning = new DateUsed(beginday,beginhours,beginminutes);	
 			int duration = Integer.parseInt(request.getParameter("duration"));
 			
-			String teachername = request.getParameter("teachername");
+			String teacherName = request.getParameter("teachername");
+			System.out.println(teacherName);
 			UserBeanControl ubc = new UserBeanControl();
-			Person teacher = ubc.checkTeacher(teachername);
+			Person teacher = ubc.checkTeacher(teacherName);
 			
 			String type = request.getParameter("type");
 			

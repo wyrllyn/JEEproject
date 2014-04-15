@@ -25,7 +25,7 @@ public class SlotControl {
 	public boolean delSlotById(int id) {
 		boolean b= false;
 		try {
-			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
+			di = DatabaseInterface.getInstance();
 			di.connect();
 			ct=di.getConnection();
 			
@@ -50,12 +50,12 @@ public class SlotControl {
 			String type) {
 		boolean b= false;
 		try {
-			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
+			di = DatabaseInterface.getInstance();
 			di.connect();
 			ct=di.getConnection();
 			sm=ct.createStatement();			
 			
-			int a=sm.executeUpdate("insert into Slot values('"+name+"','"+beginning+"','"+duration+"','"+teacher+"','"+type+"')");
+			int a=sm.executeUpdate("insert into Slot values('"+teacher.getId()+"','"+duration+"','"+type+"')");
 			
 			if(a==1){				
 				b=true;
@@ -72,26 +72,30 @@ public class SlotControl {
 	public boolean modifierSlot(int id, String name, DateUsed beginning,
 			int duration, Person teacher,String type) {
 		boolean b= false;
-		try {
-			di =new DatabaseInterface("jdbc:sqlite:jee.db","manager","manager");
-			di.connect();
-			ct=di.getConnection();
-			sm=ct.createStatement();
-			
-			
-			
-			int a=sm.executeUpdate("update Slot set name='"+name+"',beginning='"+beginning+"',duration='"+duration+"',teacher='"+teacher+"',type='"+type+"' where id='"+id+"'");
-			
-			if(a==1){				
-				b=true;
+		//il n'y pas de prof du nom ce que vous avez donné
+		if(teacher==null)return false;
+		else{
+				
+			try {
+				di = DatabaseInterface.getInstance();
+				di.connect();
+				ct=di.getConnection();
+				sm=ct.createStatement();
+				
+				
+				
+				int a=sm.executeUpdate("update Slot set name='"+name+"',beginning=\""+beginning+"\",duration='"+duration+"',teacher_id=\""+teacher.getId()+"\",class_type='"+type+"' where id='"+id+"'");
+				
+				if(a==1){				
+					b=true;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				di.disconnect();
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			di.disconnect();
+			return b;
 		}
-		return b;
 	}
-	
 }
