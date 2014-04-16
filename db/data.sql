@@ -20,13 +20,20 @@ insert into Class (duration, name) values (80, "C");
 insert into Room (size) values (50);
 insert into Room (size) values (50);
 insert into Room (size) values (50);
--- Slot -- for the record: 1397651839947
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (1, 80, "CM", 0, "Your Death");
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "TD", 0, "La Muerte");
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 120, "La Mort");
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (1, 80, "TD", 120, "Das Mort");
+-- Slot -- for the record, now is: 1397651839947
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 0, "JEE");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (4, 80, "TD", 0, "Framework");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 120, "JEE");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (4, 80, "TD", 120, "Framework");
 -- Timetable --
 insert into Timetable (group_id) values (2); -- M1 Info
+insert into Timetable (group_id) values (1); -- L3 Info
+insert into Timetable (group_id) values (3); -- M2 Info SILI
+insert into Timetable (group_id) values (4); -- M2 Info ID
 -- TimetableMap --
+---- M1 Info ----
 insert into TimetableMap (timetable_id, slot_id, room_id) values (1, 1, 1);
+insert into TimetableMap (timetable_id, slot_id, room_id) values (1, 2, 2);
+insert into TimetableMap (timetable_id, slot_id, room_id) values (1, 3, 2);
+insert into TimetableMap (timetable_id, slot_id, room_id) values (1, 4, 1);
 -- The End --

@@ -46,6 +46,7 @@ create table Slot(
 create table Timetable(
 	id integer primary key autoincrement,
 	group_id integer not null,
+	has_been_checked integer default 0,
 	foreign key (group_id) references Group_(id)
 );
 
