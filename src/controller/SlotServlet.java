@@ -36,7 +36,7 @@ public class SlotServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String flag = request.getParameter("flag");
+		String flag = request.getParameter("flag");
 		
 		if(flag.equals("delSlot")){
 			
@@ -54,14 +54,16 @@ String flag = request.getParameter("flag");
 		}
 		
 		else if(flag.equals("addSlot")){
-		
 			String name = request.getParameter("name");		
 			Days beginday = (Days)request.getAttribute("beginday");
 			int beginhours = Integer.parseInt(request.getParameter("beginhours"));
 			int beginminutes = Integer.parseInt(request.getParameter("beginminutes"));
 			DateUsed beginning = new DateUsed(beginday,beginhours,beginminutes);				
 			int duration = Integer.parseInt(request.getParameter("duration"));
-			Person teacher = (Person) request.getAttribute("teacher");
+			String teacherName = request.getParameter("teachername");
+			System.out.println(teacherName);
+			UserBeanControl ubc = new UserBeanControl();
+			Person teacher = ubc.checkTeacher(teacherName);
 			String type = request.getParameter("type");
 		
 			SlotControl sc = new SlotControl();

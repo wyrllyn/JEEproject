@@ -52,8 +52,8 @@
 			<td><%=slot.getName() %></td>
 			<td><%=slot.getBeginning().getDay()+" "
 			+slot.getBeginning().getHours()+"H "
-			+slot.getBeginning().getMinutes()%></td>
-			<td><%=slot.getDuration() %></td>
+			+slot.getBeginning().getMinutes()+"Min"%></td>
+			<td><%=slot.getDuration()+"Min" %></td>
 			<td><%=slot.getTeacher().getName() %></td>
 			<td><%=slot.getType() %></td>	
 			<td><a href="ModifierSlot.jsp?id=<%=slot.getId() %>
@@ -68,11 +68,12 @@
 			
 			<td><a href="SlotServlet?flag=delSlot&id=<%=slot.getId()%>">Delete slot</a></td>			
 		</tr>
+		
 		<% 
 	}
 	di.disconnect();
 %>
-
+<a href="AddSlot.jsp">Add slot</a>
 </table>
 
 

@@ -55,7 +55,8 @@ public class SlotControl {
 			ct=di.getConnection();
 			sm=ct.createStatement();			
 			
-			int a=sm.executeUpdate("insert into Slot values('"+teacher.getId()+"','"+duration+"','"+type+"')");
+			int a=sm.executeUpdate("insert into Slot (name, beginning, duration, teacher_id, class_type)"
+					+ "values('"+name+"','\""+beginning+"\"','"+duration+"','\""+teacher.getId()+"\"','"+type+"')");
 			
 			if(a==1){				
 				b=true;

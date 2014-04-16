@@ -163,7 +163,7 @@ public class DatabaseInterface {
 	 * 
 	 * @param username
 	 * @param userpassword
-	 * @return true if the user has been authenticated.
+	 * @return 0 if the user is prof,1 student , 2 wrong login.
 	 */
 	public int authenticateUser(String username, String userpassword) {
 		connect();
