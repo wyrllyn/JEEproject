@@ -27,14 +27,14 @@ public class DateUsed implements Comparable {
 		int h = this.hours;
 		Days dayE = this.day;
 		if (min >= 60) {
-			min -= 60;
+			h += min / 60;
+			min = min % 60;
+			
 			if(h == 23){
 				h = 0;
 				increment(dayE);			
 			}
-			else {
-				h++;
-			}
+			
 		}
 		end.setDay(dayE);
 		end.setHours(h);
@@ -77,7 +77,13 @@ public class DateUsed implements Comparable {
 		this.day = day;
 	}
 	
-	//is the present Date + duration included into second ? 
+	/**
+	 * is the present Date + duration included into second ? 
+	 * @param fDuration
+	 * @param second
+	 * @param sDuration
+	 * @return
+	 */
 	public boolean includedInto(int fDuration, DateUsed second, int sDuration){
 		DateUsed currentEnd = this.calcutateEnd(fDuration);
 		DateUsed sEnd = second.calcutateEnd(sDuration);
@@ -136,25 +142,11 @@ public class DateUsed implements Comparable {
 	}
 	
 	//used for some manual tests, to remove later
-/*	public static void main (String args[]){
+	/*public static void main (String args[]){
 		System.out.println("test");
-		DateUsed du = new DateUsed();
-		DateUsed ds = new DateUsed();
-		int ud = 65;
-		int sd = 50;
-		
-		
-		du.setDay(Days.LUNDI);
-		du.setHours(7);
-		du.setMinutes(0);
-		ds.setDay(Days.LUNDI);
-		ds.setHours(8);
-		ds.setMinutes(0);
-		
-		System.out.println(du.includedInto(ud, ds, sd));
-		
-		
-		
+		DateUsed du = new DateUsed(Days.LUNDI, 8, 0);
+		System.out.println(du);
+		System.out.println(du.calcutateEnd(200));
 	}*/
 	
 	

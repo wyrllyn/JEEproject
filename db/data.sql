@@ -20,7 +20,7 @@ insert into Class (duration, name) values (80, "C");
 insert into Room (size) values (50);
 insert into Room (size) values (50);
 insert into Room (size) values (50);
--- Slot --
+-- Slot -- for the record: 1397651839947
 insert into Slot (teacher_id, duration, class_type, beginning, name) values (1, 80, "CM", 0, "Your Death");
 insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "TD", 0, "La Muerte");
 insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 120, "La Mort");
