@@ -333,7 +333,7 @@ public class DatabaseInterface {
 			Statement statement = connection.createStatement();
 			String query = "SELECT * FROM Timetable, Group_, TimetableMap"
 					+ " WHERE Group_.name = \""
-					+ groupName + "\";";
+					+ groupName + "\" group by slot_id;";
 			ResultSet result = statement.executeQuery(query);
 			
 			Map<Slot, Room> timetableMap = new HashMap<Slot, Room>();

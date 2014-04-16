@@ -71,10 +71,10 @@ int beginminutes = d.getMinutes();
 			<td><input type="submit" value="Add Cours"/></td>
 			<td><input type="reset" value="Reset"/></td>
 		</tr>
-	</table>
-	
+	</table>	
 </form>
-
+<a href="ModifierTable.jsp">Back to modifier page</a>
+</tr>
 </center>
 <hr>
 </body>

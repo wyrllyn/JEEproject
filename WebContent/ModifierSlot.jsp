@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+
+
 </head>
 <body bgcolor="lightgreen">
 <center>
@@ -70,12 +73,15 @@
 		<tr>
 			<td><input type="submit" value="Modifier Cours"/></td>
 			<td><input type="reset" value="Reset"/></td>
+
 		</tr>
 	</table>
 	
 </form>
 
-</center>
+
 <hr>
+<a href="ModifierTable.jsp">Back to modifier page</a>
+</center>
 </body>
 </html>

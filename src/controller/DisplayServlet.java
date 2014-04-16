@@ -4,29 +4,44 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet implementation class DisplayServlet
+ */
+@WebServlet("/DisplayServlet")
 public class DisplayServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DisplayServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * 
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	private static final long serialVersionUID = -7468405028901137391L;
-	
-	public DisplayServlet() {
-		
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String displayMode = request.getParameter("display_mode");
 		String group = request.getParameter("group");
-		
+		System.out.println("displayMode="+displayMode+"group="+group);
 		request.getSession().setAttribute("display_mode", displayMode);
 		request.getSession().setAttribute("group", group);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("display.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("display.jsp").forward(request, response);
+		
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doGet(request, response);
+	}
+
 }

@@ -131,7 +131,6 @@ public class DateUsed implements Comparable {
 				return 0;
 			}
 		}
-		// TODO later before or after
 		return -1;
 	}
 
