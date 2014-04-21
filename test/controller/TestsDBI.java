@@ -45,7 +45,6 @@ public class TestsDBI {
 	
 	@Test
 	public void test_getTeacherByName() {
-		@SuppressWarnings("static-access")
 		Person teacher = dbi.getTeacherByName("Goeffon");
 		assertNotNull(teacher);
 		assertEquals("Goeffon", teacher.getName());

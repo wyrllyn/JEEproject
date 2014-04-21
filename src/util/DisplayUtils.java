@@ -1,8 +1,5 @@
 package util;
 
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-
 import model.DateUsed;
 import model.Slot;
 

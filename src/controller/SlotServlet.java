@@ -1,9 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +26,6 @@ public class SlotServlet extends HttpServlet {
      */
     public SlotServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

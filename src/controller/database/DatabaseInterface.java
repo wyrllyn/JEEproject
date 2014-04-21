@@ -296,8 +296,8 @@ public class DatabaseInterface {
 		return teachers;
 	}
 
-	public static Person getTeacherByName(String name) {
-		instance.connect();
+	public Person getTeacherByName(String name) {
+		connect();
 		try {
 			Statement statement = connection.createStatement();
 			String query = "SELECT User.id, name ,password FROM Teacher, User"

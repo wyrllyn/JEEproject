@@ -15,7 +15,6 @@ import model.Timetable;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.database.DatabaseInterface;
@@ -51,7 +50,6 @@ public class TestsManagement {
 
 	@Test
 	public void test_isThisPersonAvailable_OK() {
-		@SuppressWarnings("static-access")
 		Person p = dbi.getTeacherByName("Goeffon");
 		int duration = 80;
 
@@ -65,7 +63,6 @@ public class TestsManagement {
 	
 	@Test
 	public void test_isThisPersonAvailable_KO() {
-		@SuppressWarnings("static-access")
 		Person p = dbi.getTeacherByName("Goeffon");
 		int duration = 80;
 		

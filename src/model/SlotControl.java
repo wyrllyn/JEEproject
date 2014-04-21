@@ -1,17 +1,13 @@
 package model;
 
-import java.sql.*;
-import java.sql.Date;
-import java.util.*;
-
-import javax.servlet.jsp.tagext.TryCatchFinally;
+import java.sql.Connection;
+import java.sql.Statement;
 
 import controller.database.DatabaseInterface;
 
 public class SlotControl {
 	//prepare statement
 	private Statement sm=null;
-	private ResultSet rs=null;
 	private Connection ct=null;
 	private DatabaseInterface di=null;
 	/**
@@ -29,7 +25,6 @@ public class SlotControl {
 			di = DatabaseInterface.getInstance();
 			di.connect();
 			ct=di.getConnection();
-			
 			
 			sm=ct.createStatement();
 			
@@ -83,8 +78,6 @@ public class SlotControl {
 				di.connect();
 				ct=di.getConnection();
 				sm=ct.createStatement();
-				
-				
 				
 				int a=sm.executeUpdate("update Slot set name='"+name+"',beginning=\""+beginning+"\",duration='"+duration+"',teacher_id=\""+teacher.getId()+"\",class_type='"+type+"' where id='"+id+"'");
 				

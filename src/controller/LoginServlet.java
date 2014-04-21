@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
