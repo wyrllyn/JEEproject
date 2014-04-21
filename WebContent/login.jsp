@@ -6,15 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login page</title>
 </head>
-<body bgcolor="#11E8FA">
+<body bgcolor="#AABBBB">
 <center>
 <hr>
-<font color=orange size=4>User Login</font><br/>
+<font size=4>User Login</font><br/>
 <form action="LoginServlet" method="post">
 <font color=red size=4>UserName：</font><input type="text" name="username"><br/>
 <font color=red size=4>PassWord：</font><input type="password" name="password"><br/>
 <input type="submit" value="login">
 <input type="reset" value="reset">
+</form>
 </center>
 </body>
 </html>

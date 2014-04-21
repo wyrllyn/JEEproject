@@ -1,3 +1,4 @@
+<%@page import="controller.database.DatabaseInterface"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      	 <!--java package import-->
@@ -6,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Add Slot</title>
 </head>
 <body bgcolor="lightblue">
 <center>
@@ -17,31 +18,20 @@
 
 <h1><font color=yellow size=4>Please insert class information</font></h1>
 
-	<!--
-	private int id;
-	private String name;
-	
-	private DateUsed beginning;
-		private int hours;
-		private int minutes;
-		private Days day;
-	
-	private int duration;
-	private Person teacher;
-	private String type; //CM, TD etc.
-	-->
-
 <form action="SlotServlet?flag=addSlot" method="post">
 <%
-Date d = new Date();
+DatabaseInterface dbi = DatabaseInterface.getInstance();
+DateUsed d = new DateUsed();
 int beginhours = d.getHours();
 int beginminutes = d.getMinutes();
+
+Person teacher = dbi.getTeacherById(1);
 %>
 	
 	<table>
 		<tr>
 			<td bgcolor=pink>Class name</td>
-			<td><input type="text" name="name" value="<%="Cour" %>"></td>			
+			<td><input type="text" name="name" value="<%="NAME" %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=silver>Begin day</td>
@@ -61,11 +51,11 @@ int beginminutes = d.getMinutes();
 		</tr>
 		<tr>
 			<td bgcolor=silver>teacher</td>
-			<td><input type="text" name="teachername" value="<%="Goeffon" %>"></td>			
+			<td><input type="text" name="teachername" value="<%=teacher.getName() %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=pink>type</td>
-			<td><input type="text" name="type" value="<%="cc" %>"></td>			
+			<td><input type="text" name="type" value="<%="CM" %>"></td>			
 		</tr>
 		<tr>
 			<td><input type="submit" value="Add Cours"/></td>
@@ -74,7 +64,6 @@ int beginminutes = d.getMinutes();
 	</table>	
 </form>
 <a href="ModifierTable.jsp">Back to modifier page</a>
-</tr>
 </center>
 <hr>
 </body>

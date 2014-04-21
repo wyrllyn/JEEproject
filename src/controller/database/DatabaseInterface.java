@@ -303,9 +303,6 @@ public class DatabaseInterface {
 			String query = "SELECT User.id, name ,password FROM Teacher, User"
 					+ " WHERE User.name = \""
 					+ name + "\" AND User.id = Teacher.user_id;";
-			
-
-		
 		
 			ResultSet result = statement.executeQuery(query);
 			result.next();
@@ -316,7 +313,7 @@ public class DatabaseInterface {
 			teacher.setName(result.getString("name"));
 			teacher.setPassword("password");
 			teacher.setType("prof");
-			//System.out.println(teacher);
+			
 			return teacher;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -324,6 +321,38 @@ public class DatabaseInterface {
 		instance.disconnect();
 		return null;
 	}
+	
+	/**
+	 * Note: uses a Teacher id, as opposed to a User id.
+	 * @param id
+	 * @return
+	 */
+	public Person getTeacherById(int id) {
+		connect();
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT User.id, name ,password FROM Teacher, User"
+					+ " WHERE Teacher.id = \""
+					+ id + "\" AND User.id = Teacher.user_id;";
+		
+			ResultSet result = statement.executeQuery(query);
+			result.next();
+			Person teacher = new Person();
+			int userId = result.getInt("id");
+			teacher.setId(userId);
+			
+			teacher.setName(result.getString("name"));
+			teacher.setPassword("password");
+			teacher.setType("prof");
+			
+			return teacher;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		instance.disconnect();
+		return null;
+	}
+	
 
 	public Timetable getTimetableByGroup(String groupName) {
 		connect();

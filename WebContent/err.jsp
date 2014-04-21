@@ -4,14 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Error</title>
 </head>
 <body>
 <hr>
 
 <font color=red size=6>Operation failed</font><br/>
 	<a href="ModifierTable.jsp">Back to modifier page</a>
-</center>
 <hr>
 </body>
 </html>
