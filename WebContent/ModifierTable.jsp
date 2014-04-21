@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <!--java package import-->
-<%@ page import="java.sql.*,java.util.*,model.*,database.*" %>  
+<%@ page import="java.sql.*,java.util.*,model.*,controller.database.*" %>  
 <%@ page import="model.DateUsed" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

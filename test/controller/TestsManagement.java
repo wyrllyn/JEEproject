@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import database.DatabaseInterface;
+import controller.database.DatabaseInterface;
 
 public class TestsManagement {
 	

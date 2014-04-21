@@ -13,7 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import database.DatabaseInterface;
+import controller.database.DatabaseInterface;
 
 public class TestsDBI {
 

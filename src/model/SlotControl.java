@@ -3,9 +3,10 @@ package model;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
+
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
-import database.DatabaseInterface;
+import controller.database.DatabaseInterface;
 
 public class SlotControl {
 	//prepare statement

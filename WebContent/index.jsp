@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="database.DatabaseInterface"%>
+<%@page import="controller.database.DatabaseInterface"%>
 <%@page import="model.Groups"%>
   <!--java package import-->
 <%@ page import="java.sql.*,java.util.*,controller.*" %> 
@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1>Timetable index</h1>
-	<jsp:useBean id="databaseInterface" class="database.DatabaseInterface" />
+	<jsp:useBean id="databaseInterface" class="controller.database.DatabaseInterface" />
 	<% databaseInterface = DatabaseInterface.getInstance();	%>
 	<form action="DisplayServlet" method="post">
 		<select name="display_mode">

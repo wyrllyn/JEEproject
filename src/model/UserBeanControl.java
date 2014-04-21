@@ -1,6 +1,6 @@
 package model;
 
-import database.DatabaseInterface;
+import controller.database.DatabaseInterface;
 
 public class UserBeanControl {
 	
