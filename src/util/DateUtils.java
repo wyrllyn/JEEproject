@@ -6,7 +6,7 @@ import java.util.Date;
 import model.DateUsed;
 import model.Days;
 
-public class DateUtil {
+public class DateUtils {
 	
 	/**
 	 * Constructs a Date object out of a {@link DateUsed}
@@ -56,6 +56,28 @@ public class DateUtil {
 		case Calendar.THURSDAY:
 			return Days.JEUDI;
 		case Calendar.FRIDAY:
+			return Days.VENDREDI;
+		}
+		return null;
+	}
+	
+	public static Days getDay(String day) {
+		day = day.toUpperCase();
+		switch (day) {
+		case "MONDAY":
+		case "LUNDI":
+			return Days.LUNDI;
+		case "TUESDAY":
+		case "MARDI":
+			return Days.MARDI;
+		case "WEDNESDAY":
+		case "MERCREDI":
+			return Days.MERCREDI;
+		case "THURSDAY":
+		case "JEUDI":
+			return Days.JEUDI;
+		case "FRIDAY":
+		case "VENDREDI":
 			return Days.VENDREDI;
 		}
 		return null;

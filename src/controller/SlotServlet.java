@@ -13,6 +13,7 @@ import model.Days;
 import model.Person;
 import model.SlotControl;
 import model.UserBeanControl;
+import util.DateUtils;
 
 /**
  * Servlet implementation class SlotServlet
@@ -51,13 +52,12 @@ public class SlotServlet extends HttpServlet {
 		
 		else if(flag.equals("addSlot")){
 			String name = request.getParameter("name");		
-			Days beginday = (Days)request.getAttribute("beginday");
+			Days beginday = DateUtils.getDay(request.getParameter("beginday"));
 			int beginhours = Integer.parseInt(request.getParameter("beginhours"));
 			int beginminutes = Integer.parseInt(request.getParameter("beginminutes"));
 			DateUsed beginning = new DateUsed(beginday,beginhours,beginminutes);				
 			int duration = Integer.parseInt(request.getParameter("duration"));
 			String teacherName = request.getParameter("teachername");
-			System.out.println(teacherName);
 			UserBeanControl ubc = new UserBeanControl();
 			Person teacher = ubc.checkTeacher(teacherName);
 			String type = request.getParameter("type");
@@ -77,19 +77,17 @@ public class SlotServlet extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			String name = request.getParameter("name");
-			Days beginday = (Days)request.getAttribute("beginday");
+			Days beginday = DateUtils.getDay(request.getParameter("beginday"));
 			int beginhours = Integer.parseInt(request.getParameter("beginhours"));
 			int beginminutes = Integer.parseInt(request.getParameter("beginminutes"));
 			DateUsed beginning = new DateUsed(beginday,beginhours,beginminutes);	
 			int duration = Integer.parseInt(request.getParameter("duration"));
-			
 			String teacherName = request.getParameter("teachername");
-			System.out.println(teacherName);
+			
 			UserBeanControl ubc = new UserBeanControl();
 			Person teacher = ubc.checkTeacher(teacherName);
 			
 			String type = request.getParameter("type");
-			
 			
 			SlotControl sc = new SlotControl();
 		    

@@ -1,3 +1,4 @@
+<%@page import="util.DisplayUtils"%>
 <%@page import="controller.database.DatabaseInterface"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,10 +14,10 @@
 <center>
 
 <!-- import image -->
-<img src="img/JspPage.png">
+<img src="resources/img/JspPage.png">
 <hr>
 
-<h1><font color=yellow size=4>Please insert class information</font></h1>
+<h1><font color=green size=4>Please insert class information</font></h1>
 
 <form action="SlotServlet?flag=addSlot" method="post">
 <%
@@ -34,24 +35,28 @@ Person teacher = dbi.getTeacherById(1);
 			<td><input type="text" name="name" value="<%="NAME" %>"></td>			
 		</tr>
 		<tr>
-			<td bgcolor=silver>Begin day</td>
-			<td><input type="text" name="beginday" value="<%=Days.LUNDI %>"></td>			
+			<td bgcolor=silver>Day</td>
+			<td><select>
+				<% out.print(DisplayUtils.getDaysSelectOptions()); %>
+			</select></td>			
 		</tr>
 		<tr>
-			<td bgcolor=pink>Begin hour</td>
+			<td bgcolor=pink>Hour</td>
 			<td><input type="text" name="beginhours" value="<%=beginhours %>"></td>			
 		</tr>
 		<tr>
-			<td bgcolor=silver>Begin minutes</td>
+			<td bgcolor=silver>Minutes</td>
 			<td><input type="text" name="beginminutes" value="<%=beginminutes %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=pink>duration</td>
-			<td><input type="text" name="duration" value="<%=0 %>"></td>			
+			<td><input type="text" name="duration" value="<%=60 %>"></td>			
 		</tr>
 		<tr>
 			<td bgcolor=silver>teacher</td>
-			<td><input type="text" name="teachername" value="<%=teacher.getName() %>"></td>			
+			<td><select name="teachername">
+				<% out.print(DisplayUtils.getTeacherSelectOptions()); %>
+			</select></td>			
 		</tr>
 		<tr>
 			<td bgcolor=pink>type</td>
