@@ -28,10 +28,10 @@ public class TestsDateUtil {
 	@Test
 	public void test_createDateUsed() {
 		Date date = new Date();
-		DateUsed du = DateUtil.createDateUsed(date);
+		DateUsed du = DateUtils.createDateUsed(date);
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
-		assertEquals(DateUtil.convertToDays(c.get(Calendar.DAY_OF_WEEK)), du.getDay());
+		assertEquals(DateUtils.convertToDays(c.get(Calendar.DAY_OF_WEEK)), du.getDay());
 		assertEquals(c.get(Calendar.HOUR_OF_DAY), du.getHours());
 		assertEquals(c.get(Calendar.MINUTE), du.getMinutes());
 	}
@@ -39,10 +39,10 @@ public class TestsDateUtil {
 	@Test
 	public void test_createDate() {
 		DateUsed du = new DateUsed(Days.MERCREDI, 10, 0);
-		Date date = DateUtil.createDate(du);
+		Date date = DateUtils.createDate(du);
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
-		assertEquals(DateUtil.convertToDays(c.get(Calendar.DAY_OF_WEEK)), du.getDay());
+		assertEquals(DateUtils.convertToDays(c.get(Calendar.DAY_OF_WEEK)), du.getDay());
 		assertEquals(c.get(Calendar.HOUR_OF_DAY), du.getHours());
 		assertEquals(c.get(Calendar.MINUTE), du.getMinutes());
 	}

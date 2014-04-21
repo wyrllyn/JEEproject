@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import util.DateUtil;
+import util.DateUtils;
 import model.DateUsed;
 import model.Person;
 import model.Room;
@@ -226,7 +226,7 @@ public class DatabaseInterface {
 				slot.setId(id);
 				
 				Date date = new Date(result.getLong("beginning"));
-				DateUsed beginning = DateUtil.createDateUsed(date);
+				DateUsed beginning = DateUtils.createDateUsed(date);
 				slot.setBeginning(beginning);
 				
 				slot.setDuration(result.getInt("duration"));
@@ -252,7 +252,7 @@ public class DatabaseInterface {
 			slot.setId(id);
 			
 			Date date = new Date(result.getLong("beginning"));
-			DateUsed beginning = DateUtil.createDateUsed(date);
+			DateUsed beginning = DateUtils.createDateUsed(date);
 			slot.setBeginning(beginning);
 			
 			slot.setDuration(result.getInt("duration"));
