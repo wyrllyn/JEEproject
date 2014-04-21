@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="util.DisplayUtils"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.HashMap"%>
@@ -26,15 +27,20 @@
 		Set<Slot> slots = timetable.getTimetable().keySet();
 
 		out.print("<table>");
+		// Initialize our map
 		Map<Days, List<Slot>> dayMap = new HashMap<Days, List<Slot>>();
 		dayMap.put(Days.LUNDI, new LinkedList<Slot>());
 		dayMap.put(Days.MARDI, new LinkedList<Slot>());
 		dayMap.put(Days.MERCREDI, new LinkedList<Slot>());
 		dayMap.put(Days.JEUDI, new LinkedList<Slot>());
 		dayMap.put(Days.VENDREDI, new LinkedList<Slot>());
-		
+		// fill our lists
 		for (Slot slot : slots) {
 			dayMap.get(slot.getBeginning().getDay()).add(slot);
+		}
+		// sort our lists
+		for (Days day : dayMap.keySet()) {
+			Collections.sort(dayMap.get(day));
 		}
 		
 		out.print("<tr><td>Lundi</td>");

@@ -3,6 +3,8 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
+import util.DaysComparator;
+
 public class DateUsed implements Comparable<DateUsed> {
 	private int hours;
 	private int minutes;
@@ -140,12 +142,23 @@ public class DateUsed implements Comparable<DateUsed> {
 	@Override
 	public int compareTo(DateUsed secondDate) {
 		if (secondDate.getDay() == this.getDay()){
-			if (secondDate.getHours() == this.getHours()
-					&& secondDate.getMinutes() == this.getMinutes()){
-				return 0;
+			if (secondDate.getHours() == this.getHours()) {
+					if (secondDate.getMinutes() == this.getMinutes()){
+						return 0;
+					} else if (this.minutes > secondDate.minutes) {
+						return 1;
+					} else  {
+						return -1;
+					}
+			} else if (this.hours > secondDate.hours) {
+				return 1;
+			} else {
+				return -1;
 			}
+		} else {
+			DaysComparator c = new DaysComparator();
+			return c.compare(this.day, secondDate.day);
 		}
-		return -1;
 	}
 
 	@Override

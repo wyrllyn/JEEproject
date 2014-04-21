@@ -7,3 +7,4 @@ public enum Days {
 	JEUDI,
 	VENDREDI
 }
+

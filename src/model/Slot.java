@@ -2,7 +2,7 @@ package model;
 
 
 
-public class Slot {
+public class Slot implements Comparable<Slot> {
 		private int id;
 		private String name;
 		private DateUsed beginning;
@@ -78,6 +78,14 @@ public class Slot {
 			return "Slot [id=" + id + ", name=" + name + ", beginning=" + beginning
 					+ ", duration=" + duration + ", teacher=" + teacher + ", type="
 					+ type + "]";
+		}
+
+		/**
+		 * Compares the Slot's date.
+		 */
+		@Override
+		public int compareTo(Slot otherSlot) {
+			return this.beginning.compareTo(otherSlot.beginning);
 		}
 	
 /*	public Date getEndDate() {
