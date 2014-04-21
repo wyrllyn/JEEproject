@@ -1,22 +1,37 @@
 package model;
 
-public class DateUsed implements Comparable {
+import java.util.Calendar;
+import java.util.Date;
+
+public class DateUsed implements Comparable<DateUsed> {
 	private int hours;
 	private int minutes;
 	private Days day;
+	/**
+	 * Default = Monday 6th January 2014
+	 */
+	private Date date;
 	
+	private static final int DEFAULT_DAY = 6;
+	
+	/**
+	 * Constructs a DateUsed set to Monday, 9h30.
+	 */
 	public DateUsed() {
+		Calendar c = Calendar.getInstance();
+		c.set(2014, Calendar.JANUARY, DEFAULT_DAY, 0, 0, 0);
+		date = c.getTime();
 		this.hours = 9;
 		this.minutes = 30;
 		this.day = Days.LUNDI;
 	}	
 	
 	
-
 	public DateUsed(Days beginday, int beginhours, int beginminutes) {
+		this();
 		setDay(beginday);
 		setHours(beginhours);
-		setMinutes(beginminutes);	
+		setMinutes(beginminutes);
 	}
 
 
@@ -123,8 +138,7 @@ public class DateUsed implements Comparable {
 
 
 	@Override
-	public int compareTo(Object arg0) {
-		DateUsed secondDate = (DateUsed) arg0;
+	public int compareTo(DateUsed secondDate) {
 		if (secondDate.getDay() == this.getDay()){
 			if (secondDate.getHours() == this.getHours()
 					&& secondDate.getMinutes() == this.getMinutes()){
@@ -140,14 +154,39 @@ public class DateUsed implements Comparable {
 				+ day + "]";
 	}
 	
-	//used for some manual tests, to remove later
-	/*public static void main (String args[]){
-		System.out.println("test");
-		DateUsed du = new DateUsed(Days.LUNDI, 8, 0);
-		System.out.println(du);
-		System.out.println(du.calcutateEnd(200));
-	}*/
-	
-	
+	/**
+	 * Synchronizes the Date with the DateUsed.
+	 */
+	public void synchronizeDate() {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		int dow = 0;
+		switch (day) {
+		case LUNDI:
+			dow = 0;
+			break;
+		case MARDI:
+			dow = 1;
+			break;
+		case MERCREDI:
+			dow = 2;
+			break;
+		case JEUDI:
+			dow = 3;
+			break;
+		case VENDREDI:
+			dow = 4;
+			break;
+		}
+		c.set(2014, Calendar.JANUARY, DEFAULT_DAY + dow, hours, minutes);
+		date = c.getTime();
+	}
 
+	/**
+	 * Recommendation: use the synchronizeDate() method before getting the Date.
+	 * @return Date object associated with this DateUsed.
+	 */
+	public Date getDate() {
+		return date;
+	}
 }

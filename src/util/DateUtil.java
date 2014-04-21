@@ -7,32 +7,15 @@ import model.DateUsed;
 import model.Days;
 
 public class DateUtil {
-
+	
 	/**
-	 * 
-	 * @param date
-	 * @return String name of the day of the week.
+	 * Constructs a Date object out of a {@link DateUsed}
+	 * @param dateUsed
+	 * @return {@link Date}
 	 */
-	public static String getDayOfTheWeek(Date date) { // Note: may not actually be used anywhere
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		int day = c.get(Calendar.DAY_OF_WEEK);
-		switch (day) {
-		case Calendar.MONDAY:
-			return "Monday";
-		case Calendar.TUESDAY:
-			return "Tuesday";
-		case Calendar.WEDNESDAY:
-			return "Wednesday";
-		case Calendar.THURSDAY:
-			return "Thursday";
-		case Calendar.FRIDAY:
-			return "Friday";
-		case Calendar.SATURDAY:
-			return "Saturday";
-		}
-		// Note: sunday is an error
-		return "Error";
+	public static Date createDate(DateUsed dateUsed) {
+		dateUsed.synchronizeDate();
+		return new Date(dateUsed.getDate().getTime());
 	}
 	
 	/**

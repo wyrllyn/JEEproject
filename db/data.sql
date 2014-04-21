@@ -20,11 +20,11 @@ insert into Class (duration, name) values (80, "C");
 insert into Room (size) values (50);
 insert into Room (size) values (50);
 insert into Room (size) values (50);
--- Slot -- for the record, now is: 1397651839947
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 0, "JEE");
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (4, 80, "TD", 0, "Framework");
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 120, "JEE");
-insert into Slot (teacher_id, duration, class_type, beginning, name) values (4, 80, "TD", 120, "Framework");
+-- Slot -- for the record, Mon Jan 06 09:30:00 CET 2014 = 1388997000834
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 1388997000834, "JEE");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (4, 80, "TD", 1388997000834, "Framework");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (2, 80, "CM", 1389000600834, "JEE");
+insert into Slot (teacher_id, duration, class_type, beginning, name) values (4, 80, "TD", 1389000600834, "Framework");
 -- Timetable --
 insert into Timetable (group_id) values (2); -- M1 Info
 insert into Timetable (group_id) values (1); -- L3 Info
