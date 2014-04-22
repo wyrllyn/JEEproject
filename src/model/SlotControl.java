@@ -75,11 +75,23 @@ public class SlotControl {
 				
 			try {
 				di = DatabaseInterface.getInstance();
+				int teacher_id = di.getTeacherId(id);
+				di.disconnect();
 				di.connect();
 				ct=di.getConnection();
 				sm=ct.createStatement();
+				beginning.synchronizeDate();
+				long time = beginning.getDate().getTime();
 				
-				int a=sm.executeUpdate("update Slot set name='"+name+"',beginning=\""+beginning+"\",duration='"+duration+"',teacher_id=\""+teacher.getId()+"\",class_type='"+type+"' where id='"+id+"'");
+				String query = "update Slot set "
+						+ "name = '" + name + "', "
+						+ "beginning = " + time + ", "
+						+ "duration = " + duration + ", "
+						+ "teacher_id = " + teacher_id + ", "
+						+ "class_type = '" + type + "' "
+						+ " where id = " + id + ";";
+				System.out.println(query);
+				int a = sm.executeUpdate(query);
 				
 				if(a==1){				
 					b=true;

@@ -271,6 +271,7 @@ public class DatabaseInterface {
 	 * @return A List of User.
 	 */
 	public List<Person> getTeachers() {
+		connect();
 		List<Person> teachers = new ArrayList<Person>();
 		
 		try {
@@ -314,11 +315,12 @@ public class DatabaseInterface {
 			teacher.setPassword("password");
 			teacher.setType("prof");
 			
+			statement.close();
 			return teacher;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		instance.disconnect();
+		disconnect();
 		return null;
 	}
 	
@@ -345,11 +347,12 @@ public class DatabaseInterface {
 			teacher.setPassword("password");
 			teacher.setType("prof");
 			
+			statement.close();
 			return teacher;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		instance.disconnect();
+		disconnect();
 		return null;
 	}
 	
@@ -398,6 +401,24 @@ public class DatabaseInterface {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public int getTeacherId(int id) {
+		int teacherId = -1;
+		connect();
+		try {
+			Statement statement = connection.createStatement();
+			String query = "SELECT id FROM Teacher WHERE user_id = "
+					+ id + ";";
+			ResultSet result = statement.executeQuery(query);
+			if (result.next()) {//not working
+				teacherId = result.getInt("id");
+			}
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teacherId;
 	}
 
 }

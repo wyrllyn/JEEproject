@@ -36,7 +36,7 @@ Person teacher = dbi.getTeacherById(1);
 		</tr>
 		<tr>
 			<td bgcolor=silver>Day</td>
-			<td><select>
+			<td><select name="beginday">
 				<% out.print(DisplayUtils.getDaysSelectOptions()); %>
 			</select></td>			
 		</tr>

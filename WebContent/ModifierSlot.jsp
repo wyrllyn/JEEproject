@@ -1,3 +1,4 @@
+<%@page import="util.DisplayUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
          <!--java package import-->
@@ -6,16 +7,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-
+<title>Modify Slot</title>
 
 </head>
 <body bgcolor="lightgreen">
 <center>
 
 <!-- import image -->
-<img src="img/JspPage.png">
+<img src="resources/img/JspPage.png">
 <hr>
 
 <h1><font color=yellow size=4>Please insert class information</font></h1>
@@ -36,7 +35,6 @@
 
 <form action="SlotServlet?flag=modifySlot&teacher=<%=request.getAttribute("teacher")%>" method="post">
 
-	
 	<table>
 		<tr>
 			<td bgcolor=brown>Class ID</td>
@@ -48,7 +46,9 @@
 		</tr>
 		<tr>
 			<td bgcolor=silver>Begin day</td>
-			<td><input type="text" name="beginday" value="<%=request.getParameter("beginday") %>"></td>			
+			<td><select name="beginday">
+				<% out.print(DisplayUtils.getDaysSelectOptions()); %>
+			</select></td>				
 		</tr>
 		<tr>
 			<td bgcolor=pink>Begin hour</td>
@@ -64,7 +64,9 @@
 		</tr>
 		<tr>
 			<td bgcolor=silver>teacher</td>
-			<td><input type="text" name="teachername" value="<%=request.getParameter("teachername") %>"></td>			
+			<td><select name="teachername">
+				<% out.print(DisplayUtils.getTeacherSelectOptions()); %>
+			</select></td>				
 		</tr>
 		<tr>
 			<td bgcolor=pink>type</td>
