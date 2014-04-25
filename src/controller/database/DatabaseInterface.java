@@ -28,7 +28,9 @@ public class DatabaseInterface {
 	
 	private DBType dbType = DBType.SQLITE;
 	private boolean connected = false;
-	protected static final String DEFAULT_URL = "jdbc:sqlite:/home/etudiant/db/jee.db";
+	//jdbc:sqlite:/home/etudiant/db/jee.db
+	//jdbc:sqlite:db/jee.db
+	protected static final String DEFAULT_URL = "jdbc:sqlite:db/jee.db";
 	protected static final String DEFAULT_USER = "default";
 	protected static final String DEFAULT_PASSWORD = "password";
 	//"jdbc:mysql://localhost:3306/jeedb";

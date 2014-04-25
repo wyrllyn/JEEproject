@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="controller.database.DatabaseInterface"%>
-<%@page import="model.Groups"%>
   <!--java package import-->
 <%@ page import="java.sql.*,java.util.*,controller.*" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
